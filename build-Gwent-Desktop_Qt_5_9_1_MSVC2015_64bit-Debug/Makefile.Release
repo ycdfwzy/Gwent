@@ -11,13 +11,13 @@ MAKEFILE      = Makefile.Release
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG
+DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -O2 -MD -W3 -w44456 -w44457 -w44458 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -EHsc $(DEFINES)
-INCPATH       = -I..\Gwent -I. -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore" -Irelease -I. -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\win32-msvc" 
+INCPATH       = -I..\Gwent -I. -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork" -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore" -Irelease -I. -I"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\win32-msvc" 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmain.lib" /LIBPATH:C:\utils\my_sql\my_sql\lib /LIBPATH:C:\utils\postgresql\pgsql\lib shell32.lib "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.lib" 
+LIBS          = /LIBPATH:"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmain.lib" /LIBPATH:C:\utils\my_sql\my_sql\lib /LIBPATH:C:\utils\postgresql\pgsql\lib shell32.lib "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Network.lib" "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.lib" 
 QMAKE         = "D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\qmake.exe"
 IDC           = idc
 IDL           = midl /NOLOGO
@@ -49,25 +49,37 @@ SOURCES       = ..\Gwent\main.cpp \
 		..\Gwent\mainwindow.cpp \
 		..\Gwent\main.cpp \
 		..\Gwent\mainwindow.cpp \
-		..\Gwent\welcomeinterface.cpp release\qrc_res.cpp \
+		..\Gwent\welcomeinterface.cpp \
+		..\Gwent\gameclient.cpp \
+		..\Gwent\mytcpsocket.cpp release\qrc_res.cpp \
 		release\moc_mainwindow.cpp \
-		release\moc_welcomeinterface.cpp
+		release\moc_welcomeinterface.cpp \
+		release\moc_gameclient.cpp \
+		release\moc_mytcpsocket.cpp
 OBJECTS       = release\main.obj \
 		release\mainwindow.obj \
 		release\main.obj \
 		release\mainwindow.obj \
 		release\welcomeinterface.obj \
+		release\gameclient.obj \
+		release\mytcpsocket.obj \
 		release\qrc_res.obj \
 		release\moc_mainwindow.obj \
-		release\moc_welcomeinterface.obj
+		release\moc_welcomeinterface.obj \
+		release\moc_gameclient.obj \
+		release\moc_mytcpsocket.obj
 
 DIST          =  ..\Gwent\mainwindow.h \
 		..\Gwent\mainwindow.h \
-		..\Gwent\welcomeinterface.h ..\Gwent\main.cpp \
+		..\Gwent\welcomeinterface.h \
+		..\Gwent\gameclient.h \
+		..\Gwent\mytcpsocket.h ..\Gwent\main.cpp \
 		..\Gwent\mainwindow.cpp \
 		..\Gwent\main.cpp \
 		..\Gwent\mainwindow.cpp \
-		..\Gwent\welcomeinterface.cpp
+		..\Gwent\welcomeinterface.cpp \
+		..\Gwent\gameclient.cpp \
+		..\Gwent\mytcpsocket.cpp
 QMAKE_TARGET  = Gwent
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Gwent.exe
@@ -144,7 +156,7 @@ all: Makefile.Release  $(DESTDIR_TARGET)
 
 $(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-release\main.obj release\mainwindow.obj release\main.obj release\mainwindow.obj release\welcomeinterface.obj release\qrc_res.obj release\moc_mainwindow.obj release\moc_welcomeinterface.obj
+release\main.obj release\mainwindow.obj release\main.obj release\mainwindow.obj release\welcomeinterface.obj release\gameclient.obj release\mytcpsocket.obj release\qrc_res.obj release\moc_mainwindow.obj release\moc_welcomeinterface.obj release\moc_gameclient.obj release\moc_mytcpsocket.obj
 $(LIBS)
 <<
 
@@ -154,10 +166,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Gwent.zip $(SOURCES) $(DIST) ..\Gwent\Gwent.pro "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\spec_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\angle.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\msvc-desktop.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\qconfig.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3danimation.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3danimation_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_accessibility_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_charts.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_charts_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_core.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_datavisualization.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_datavisualization_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designer.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_egl_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_fb_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gamepad.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gamepad_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gui.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_help.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_location.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_network.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_networkauth.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_networkauth_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_packetprotocol_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_purchasing.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_purchasing_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmldebug_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quick.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_repparser.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_repparser_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_script.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scxml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scxml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sql.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_svg.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_texttospeech.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_texttospeech_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_theme_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webview.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt_functions.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt_config.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\win32-msvc\qmake.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\spec_post.prf" .qmake.stash "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exclusive_builds.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\msvc-version.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\toolchain.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\default_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\default_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\resolve_config.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exclusive_builds_post.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\default_post.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\build_pass.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qml_debug.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\precompile_header.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\warn_on.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\resources.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\moc.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\opengl.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\uic.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qmake_use.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\file_copies.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\windows.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\testcase_targets.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exceptions.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\yacc.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\lex.prf" ..\Gwent\Gwent.pro ..\Gwent\res.qrc "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmain.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.prl"   ..\Gwent\res.qrc "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\data\dummy.cpp" ..\Gwent\mainwindow.h ..\Gwent\mainwindow.h ..\Gwent\welcomeinterface.h ..\Gwent\main.cpp ..\Gwent\mainwindow.cpp ..\Gwent\main.cpp ..\Gwent\mainwindow.cpp ..\Gwent\welcomeinterface.cpp ..\Gwent\mainwindow.ui    
+	$(ZIP) Gwent.zip $(SOURCES) $(DIST) ..\Gwent\Gwent.pro "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\spec_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\angle.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\msvc-desktop.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\qconfig.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3danimation.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3danimation_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_accessibility_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_charts.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_charts_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_core.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_datavisualization.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_datavisualization_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designer.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_egl_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_fb_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gamepad.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gamepad_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gui.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_help.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_location.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_network.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_networkauth.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_networkauth_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_packetprotocol_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_purchasing.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_purchasing_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmldebug_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quick.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_remoteobjects_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_repparser.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_repparser_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_script.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scxml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_scxml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sql.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_svg.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_texttospeech.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_texttospeech_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_theme_support_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webview.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xml.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt_functions.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt_config.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\win32-msvc\qmake.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\spec_post.prf" .qmake.stash "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exclusive_builds.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\common\msvc-version.conf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\toolchain.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\default_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\default_pre.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\resolve_config.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exclusive_builds_post.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\default_post.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\build_pass.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qml_debug.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\precompile_header.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\warn_on.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qt.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\resources.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\moc.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\opengl.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\uic.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\qmake_use.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\file_copies.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\win32\windows.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\testcase_targets.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\exceptions.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\yacc.prf" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\lex.prf" ..\Gwent\Gwent.pro ..\Gwent\res.qrc "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmain.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Network.prl" "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.prl"   ..\Gwent\res.qrc "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\data\dummy.cpp" ..\Gwent\mainwindow.h ..\Gwent\mainwindow.h ..\Gwent\welcomeinterface.h ..\Gwent\gameclient.h ..\Gwent\mytcpsocket.h ..\Gwent\main.cpp ..\Gwent\mainwindow.cpp ..\Gwent\main.cpp ..\Gwent\mainwindow.cpp ..\Gwent\welcomeinterface.cpp ..\Gwent\gameclient.cpp ..\Gwent\mytcpsocket.cpp ..\Gwent\mainwindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\main.obj release\mainwindow.obj release\main.obj release\mainwindow.obj release\welcomeinterface.obj release\qrc_res.obj release\moc_mainwindow.obj release\moc_welcomeinterface.obj
+	-$(DEL_FILE) release\main.obj release\mainwindow.obj release\main.obj release\mainwindow.obj release\welcomeinterface.obj release\gameclient.obj release\mytcpsocket.obj release\qrc_res.obj release\moc_mainwindow.obj release\moc_welcomeinterface.obj release\moc_gameclient.obj release\moc_mytcpsocket.obj
 	-$(DEL_FILE) release\Gwent.exp
 
 distclean: clean 
@@ -190,9 +202,9 @@ compiler_moc_predefs_clean:
 release\moc_predefs.h: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\data\dummy.cpp"
 	cl -Bx"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\data\dummy.cpp" 2>NUL >release\moc_predefs.h
 
-compiler_moc_header_make_all: release\moc_mainwindow.cpp release\moc_mainwindow.cpp release\moc_welcomeinterface.cpp
+compiler_moc_header_make_all: release\moc_mainwindow.cpp release\moc_mainwindow.cpp release\moc_welcomeinterface.cpp release\moc_gameclient.cpp release\moc_mytcpsocket.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_mainwindow.cpp release\moc_mainwindow.cpp release\moc_welcomeinterface.cpp
+	-$(DEL_FILE) release\moc_mainwindow.cpp release\moc_mainwindow.cpp release\moc_welcomeinterface.cpp release\moc_gameclient.cpp release\moc_mytcpsocket.cpp
 release\moc_mainwindow.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMainWindow" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmainwindow.h" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h" \
@@ -651,10 +663,20 @@ release\moc_mainwindow.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\i
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		..\Gwent\gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		..\Gwent\mytcpsocket.h \
 		..\Gwent\mainwindow.h \
 		release\moc_predefs.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe"
-	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\mainwindow.h -o release\moc_mainwindow.cpp
+	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtNetwork" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\mainwindow.h -o release\moc_mainwindow.cpp
 
 release\moc_mainwindow.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMainWindow" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmainwindow.h" \
@@ -1114,10 +1136,20 @@ release\moc_mainwindow.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\i
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		..\Gwent\gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		..\Gwent\mytcpsocket.h \
 		..\Gwent\mainwindow.h \
 		release\moc_predefs.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe"
-	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\mainwindow.h -o release\moc_mainwindow.cpp
+	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtNetwork" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\mainwindow.h -o release\moc_mainwindow.cpp
 
 release\moc_welcomeinterface.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QWidget" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwidget.h" \
@@ -1226,10 +1258,409 @@ release\moc_welcomeinterface.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc201
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainter.h" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextoption.h" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
 		..\Gwent\welcomeinterface.h \
 		release\moc_predefs.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe"
-	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\welcomeinterface.h -o release\moc_welcomeinterface.cpp
+	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtNetwork" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\welcomeinterface.h -o release\moc_welcomeinterface.cpp
+
+release\moc_gameclient.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGui" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGuiDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCore" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCoreDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig-bootstrapped.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcore-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocessordetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcompilerdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypeinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsysinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlogging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qflags.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasicatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_bootstrap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qgenericatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_cxx11.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_msvc.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobalstatic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmutex.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnumeric.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversiontagging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnamespace.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstring.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qchar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrefcount.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringbuilder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qalgorithms.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhashfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpair.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraylist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregexp.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringmatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetatype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvarlengtharray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontainerfwd.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracteventdispatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventloop.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractitemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariant.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiodevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlocale.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qshareddata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpoint.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qset.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontiguouscache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractnativeeventfilter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracttransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydataops.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydatapointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasictimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbitarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraymatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcollator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineparser.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcryptographichash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdatastream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdatetime.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdeadlinetimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qelapsedtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfiledevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdiriterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeasingcurve.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qendian.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qexception.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfactoryinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileselector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QObject" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QStringList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfilesystemwatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfinalstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfutureinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrunnable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresultstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturesynchronizer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturewatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhistorystate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qidentityproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qisenum.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qitemselectionmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonvalue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsondocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibrary.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibraryinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversionnumber.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qline.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlinkedlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlockfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qloggingcategory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmargins.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmath.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmessageauthenticationcode.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetaobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimetype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectcleanuphandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qoperatingsystemversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qparallelanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpauseanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpluginloader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocess.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpropertyanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariantanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qqueue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qreadwritelock.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrect.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsize.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregularexpression.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresource.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsavefile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedvaluerollback.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsequentialanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsettings.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedmemory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignalmapper.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignaltransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsocketnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsortfilterproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstack.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstandardpaths.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstatemachine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstorageinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlistmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporarydir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QScopedPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporaryfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextboundaryfinder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextcodec.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthread.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadpool.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadstorage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimeline.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimezone.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtranslator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypetraits.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qurl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qurlquery.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\quuid.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwaitcondition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwineventnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qxmlstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcoreversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtguiglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtgui-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qabstracttextdocumentlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qcolor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrgb.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrgba64.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindowdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindowdefs_win.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qregion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qkeysequence.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector2d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtouchdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfont.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbrush.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmatrix.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpolygon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtransform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainterpath.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixelformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qglyphrun.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrawfont.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontdatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextcursor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpalette.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessible.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessiblebridge.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbackingstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QMargins" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QRect" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurfaceformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qicon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qcursor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbitmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qclipboard.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdesktopservices.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdrag.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontmetrics.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericmatrix.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericpluginfactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qguiapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qinputmethod.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengineplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimageiohandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagereader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagewriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmatrix4x4.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector3d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector4d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qquaternion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmovie.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qoffscreensurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qt_windows.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\KHR\khrplatform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengles2ext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglcontext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QSurfaceFormat" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglversionfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengldebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglextrafunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglframebufferobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpixeltransferoptions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSharedDataPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglshaderprogram.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltexture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltextureblitter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix3x3" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix4x4" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltimerquery.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglvertexarrayobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDeviceWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintdevicewindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDevice" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QOpenGLContext" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QImage" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagedpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagelayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagesize.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpdfwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpicture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpictureformatplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixmapcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrasterwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qscreen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSize" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSizeF" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QTransform" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsessionmanager.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstandarditemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstatictext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstylehints.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsyntaxhighlighter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentfragment.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtexttable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvalidator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtguiversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		..\Gwent\mytcpsocket.h \
+		..\Gwent\gameclient.h \
+		release\moc_predefs.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe"
+	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtNetwork" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\gameclient.h -o release\moc_gameclient.cpp
+
+release\moc_mytcpsocket.cpp: "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QObject" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnamespace.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig-bootstrapped.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcore-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocessordetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcompilerdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypeinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsysinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlogging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qflags.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasicatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_bootstrap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qgenericatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_cxx11.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_msvc.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobalstatic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmutex.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnumeric.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversiontagging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstring.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qchar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrefcount.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringbuilder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qalgorithms.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhashfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpair.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraylist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregexp.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringmatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetatype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvarlengtharray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontainerfwd.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiodevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlocale.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariant.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qshareddata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpoint.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qset.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontiguouscache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer_impl.h" \
+		..\Gwent\mytcpsocket.h \
+		release\moc_predefs.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe"
+	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\moc.exe" $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/mkspecs/win32-msvc" -ID:/git/Gwent/Gwent -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtWidgets" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtGui" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtANGLE" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtNetwork" -I"D:/Program Files (x86)/Qt/5.9.1/msvc2015_64/include/QtCore" -I. -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE" -I"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\shared" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\um" -I"C:\Program Files (x86)\Windows Kits\8.1\include\\winrt" ..\Gwent\mytcpsocket.h -o release\moc_mytcpsocket.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1711,6 +2142,16 @@ release\main.obj: ..\Gwent\main.cpp ../Gwent/mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QApplication"
 
 release\mainwindow.obj: ..\Gwent\mainwindow.cpp ../Gwent/mainwindow.h \
@@ -2172,6 +2613,16 @@ release\mainwindow.obj: ..\Gwent\mainwindow.cpp ../Gwent/mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
 		ui_mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QAction" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QApplication" \
@@ -2640,6 +3091,16 @@ release\main.obj: ..\Gwent\main.cpp ../Gwent/mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QApplication"
 
 release\mainwindow.obj: ..\Gwent\mainwindow.cpp ../Gwent/mainwindow.h \
@@ -3101,6 +3562,16 @@ release\mainwindow.obj: ..\Gwent\mainwindow.cpp ../Gwent/mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
 		ui_mainwindow.h \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QAction" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QApplication" \
@@ -3217,13 +3688,920 @@ release\welcomeinterface.obj: ..\Gwent\welcomeinterface.cpp ../Gwent/welcomeinte
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainter.h" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextoption.h" \
-		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpen.h"
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		../Gwent/mainwindow.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMainWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmainwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtabwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qicon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGui" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGuiDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCore" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCoreDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracteventdispatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventloop.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractitemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractnativeeventfilter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracttransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydataops.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydatapointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasictimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbitarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraymatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcollator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineparser.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcryptographichash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdatetime.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdeadlinetimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qelapsedtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdiriterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeasingcurve.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qendian.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qexception.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfactoryinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileselector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QObject" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QStringList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfilesystemwatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfinalstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfutureinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrunnable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresultstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturesynchronizer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturewatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhistorystate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qidentityproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qisenum.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qitemselectionmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonvalue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsondocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibrary.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibraryinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversionnumber.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlinkedlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlockfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qloggingcategory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmath.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmessageauthenticationcode.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetaobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimetype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectcleanuphandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qoperatingsystemversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qparallelanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpauseanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpluginloader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocess.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpropertyanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariantanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qqueue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qreadwritelock.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregularexpression.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresource.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsavefile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedvaluerollback.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsequentialanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsettings.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedmemory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignalmapper.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignaltransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsocketnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsortfilterproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstack.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstandardpaths.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstatemachine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstorageinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlistmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporarydir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QScopedPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporaryfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextboundaryfinder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextcodec.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthread.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadpool.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadstorage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimeline.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimezone.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtranslator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypetraits.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\quuid.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwaitcondition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwineventnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qxmlstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcoreversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qabstracttextdocumentlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qglyphrun.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrawfont.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontdatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextcursor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessible.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessiblebridge.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbackingstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QMargins" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QRect" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurfaceformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbitmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qclipboard.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdesktopservices.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdrag.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericmatrix.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericpluginfactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qguiapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qinputmethod.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengineplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimageiohandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagereader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagewriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmatrix4x4.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector3d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector4d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qquaternion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmovie.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qoffscreensurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qt_windows.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\KHR\khrplatform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengles2ext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglcontext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QSurfaceFormat" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglversionfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengldebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglextrafunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglframebufferobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpixeltransferoptions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSharedDataPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglshaderprogram.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltexture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltextureblitter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix3x3" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix4x4" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltimerquery.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglvertexarrayobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDeviceWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintdevicewindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDevice" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QOpenGLContext" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QImage" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagedpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagelayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagesize.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpdfwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpicture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpictureformatplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixmapcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrasterwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qscreen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSize" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSizeF" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QTransform" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsessionmanager.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstandarditemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstatictext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstylehints.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsyntaxhighlighter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentfragment.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtexttable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvalidator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtguiversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QtWidgets" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QtWidgetsDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractspinbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qslider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractslider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtabbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qrubberband.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qframe.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractitemview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractscrollarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qaccessiblewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qaction.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qactiongroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdesktopwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qboxlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlayoutitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgridlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qbuttongroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcalendarwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcheckbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolordialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolormap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolumnview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcombobox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcommandlinkbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qpushbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcommonstyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcompleter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdatawidgetmapper.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdatetimeedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdial.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdirmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfileiconprovider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdockwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdrawutil.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qerrormessage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfiledialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfilesystemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfocusframe.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfontcombobox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfontdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qformlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QLayout" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgesture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgesturerecognizer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsanchorlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslayoutitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicseffect.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsgridlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsitemanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslinearlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsproxywidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicswidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsscene.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicssceneevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicstransform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QVector3D" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgroupbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qheaderview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qinputdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlineedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qitemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qitemeditorfactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qkeyeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qkeysequenceedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlabel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlcdnumber.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlistview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlistwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmdiarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmdisubwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmenu.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmenubar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmessagebox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmouseeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qopenglwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qplaintextedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtextedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qprogressbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qprogressdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qproxystyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QCommonStyle" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qradiobutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscroller.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QPointF" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QScrollerProperties" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollerproperties.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QMetaType" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QVariant" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qshortcut.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsizegrip.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qspinbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsplashscreen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsplitter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstackedlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstackedwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstatusbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleditemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstylefactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstylepainter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsystemtrayicon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtableview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtablewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtextbrowser.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtooltip.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreeview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreewidgetitemiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundogroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundostack.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundoview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwhatsthis.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwidgetaction.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwizard.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtwidgetsversion.h" \
+		../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMessageBox" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QDebug"
+
+release\gameclient.obj: ..\Gwent\gameclient.cpp ../Gwent/gameclient.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGui" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QtGuiDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCore" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QtCoreDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig-bootstrapped.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcore-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocessordetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcompilerdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypeinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsysinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlogging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qflags.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasicatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_bootstrap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qgenericatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_cxx11.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_msvc.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobalstatic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmutex.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnumeric.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversiontagging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnamespace.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstring.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qchar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrefcount.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringbuilder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qalgorithms.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhashfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpair.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraylist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregexp.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringmatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetatype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvarlengtharray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontainerfwd.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracteventdispatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventloop.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractitemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariant.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiodevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlocale.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qshareddata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpoint.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qset.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontiguouscache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractnativeeventfilter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstractstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qabstracttransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydataops.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydatapointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasictimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbitarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraymatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcollator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcommandlineparser.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcryptographichash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdatastream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdatetime.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdeadlinetimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qelapsedtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfiledevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdiriterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeasingcurve.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qendian.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qexception.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfactoryinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfileselector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QObject" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QStringList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfilesystemwatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfinalstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfutureinterface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrunnable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresultstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturesynchronizer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qfuturewatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhistorystate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qidentityproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qisenum.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qitemselectionmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonarray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonvalue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsondocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qjsonobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibrary.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlibraryinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversionnumber.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qline.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlinkedlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlockfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qloggingcategory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmargins.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmath.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmessageauthenticationcode.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetaobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimedatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmimetype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectcleanuphandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qoperatingsystemversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qparallelanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpauseanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpluginloader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocess.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpropertyanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariantanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qqueue.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qreadwritelock.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrect.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsize.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregularexpression.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qresource.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsavefile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedvaluerollback.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsequentialanimationgroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsettings.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedmemory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignalmapper.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsignaltransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsocketnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsortfilterproxymodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstack.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstandardpaths.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstatemachine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstorageinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlistmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemsemaphore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporarydir.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QScopedPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtemporaryfile.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextboundaryfinder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextcodec.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthread.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadpool.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qthreadstorage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimeline.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtimezone.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtranslator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypetraits.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qurl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qurlquery.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\quuid.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwaitcondition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qwineventnotifier.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qxmlstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcoreversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtguiglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtgui-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qabstracttextdocumentlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qcolor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrgb.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrgba64.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindowdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindowdefs_win.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qregion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qkeysequence.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector2d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtouchdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfont.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbrush.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmatrix.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpolygon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtransform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainterpath.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixelformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qglyphrun.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrawfont.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontdatabase.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextcursor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocument.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpalette.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessible.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessiblebridge.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qaccessibleplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbackingstore.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QMargins" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QRect" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsurfaceformat.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qicon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qcursor.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qbitmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qclipboard.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdesktopservices.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qdrag.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qfontmetrics.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericmatrix.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qgenericpluginfactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qguiapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qinputmethod.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qiconengineplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimageiohandler.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagereader.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qimagewriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmatrix4x4.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector3d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvector4d.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qquaternion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qmovie.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qoffscreensurface.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qt_windows.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES3\gl3platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\KHR\khrplatform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtANGLE\GLES2\gl2platform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengles2ext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglbuffer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglcontext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QSurfaceFormat" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglversionfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengldebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglextrafunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglframebufferobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglpixeltransferoptions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSharedDataPointer" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglshaderprogram.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltexture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltextureblitter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix3x3" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMatrix4x4" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopengltimerquery.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglvertexarrayobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qopenglwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDeviceWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintdevicewindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPaintDevice" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QOpenGLContext" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QImage" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagedpaintdevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagelayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpagesize.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpaintengine.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpainter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpdfwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpicture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpictureformatplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qpixmapcache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qrasterwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qscreen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QList" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSize" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QSizeF" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QTransform" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsessionmanager.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstandarditemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstatictext.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qstylehints.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qsyntaxhighlighter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentfragment.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextdocumentwriter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtextlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtexttable.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qvalidator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\qtguiversion.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QString" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		../Gwent/mytcpsocket.h \
+		../Gwent/mainwindow.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMainWindow" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmainwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtwidgetsglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtwidgets-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsizepolicy.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtabwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QtWidgets" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QtWidgetsDepends" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractitemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleoption.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractspinbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qslider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractslider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtabbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qrubberband.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qframe.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractitemview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qabstractscrollarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qaccessiblewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qaction.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qactiongroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qapplication.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdesktopwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qboxlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlayoutitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgridlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qbuttongroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcalendarwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcheckbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolordialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolormap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcolumnview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcombobox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcommandlinkbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qpushbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcommonstyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qcompleter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdatawidgetmapper.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdatetimeedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdial.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdialogbuttonbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdirmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfileiconprovider.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdockwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qdrawutil.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qerrormessage.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfiledialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfilesystemmodel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfocusframe.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfontcombobox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qfontdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qformlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QLayout" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgesture.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgesturerecognizer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsanchorlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslayoutitem.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicseffect.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsgridlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsitemanimation.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicslinearlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsproxywidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicswidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsscene.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicssceneevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicstransform.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QVector3D" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgraphicsview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qgroupbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qheaderview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qinputdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlineedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qitemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qitemeditorfactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qkeyeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qkeysequenceedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlabel.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlcdnumber.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlistview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qlistwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmdiarea.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmdisubwindow.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmenu.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmenubar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmessagebox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qmouseeventtransition.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qopenglwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QWidget" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qplaintextedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtextedit.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qprogressbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qprogressdialog.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qproxystyle.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QCommonStyle" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qradiobutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscroller.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QPointF" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QScrollerProperties" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qscrollerproperties.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QMetaType" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QVariant" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qshortcut.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsizegrip.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qspinbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsplashscreen.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsplitter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstackedlayout.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstackedwidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstatusbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleditemdelegate.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstylefactory.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstylepainter.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qstyleplugin.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qsystemtrayicon.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtableview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtablewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtextbrowser.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbox.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtoolbutton.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtooltip.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreeview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreewidget.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtreewidgetitemiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundogroup.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundostack.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qundoview.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwhatsthis.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwidgetaction.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qwizard.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\qtwidgetsversion.h" \
+		../Gwent/welcomeinterface.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPalette" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPixmap" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QPainter" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QMouseEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtGui\QKeyEvent" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtWidgets\QMessageBox" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QDebug"
+
+release\mytcpsocket.obj: ..\Gwent\mytcpsocket.cpp ../Gwent/mytcpsocket.h \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\QObject" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnamespace.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig-bootstrapped.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qconfig.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtcore-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsystemdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qprocessordetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcompilerdetection.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtypeinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsysinfo.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlogging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qflags.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbasicatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_bootstrap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qgenericatomic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_cxx11.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qatomic_msvc.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qglobalstatic.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmutex.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qnumeric.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qversiontagging.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobjectdefs_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstring.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qchar.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qrefcount.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qarraydata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringbuilder.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qalgorithms.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiterator.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhashfunctions.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpair.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qbytearraylist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringlist.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qregexp.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qstringmatcher.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcoreevent.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qscopedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmetatype.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvarlengtharray.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontainerfwd.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qobject_impl.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\QTcpSocket" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtcpsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetworkglobal.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qtnetwork-config.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtNetwork\qabstractsocket.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qiodevice.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qdebug.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qhash.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qmap.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qtextstream.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qlocale.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvariant.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qshareddata.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qvector.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qpoint.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qset.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qcontiguouscache.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer.h" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\include\QtCore\qsharedpointer_impl.h"
 
 release\qrc_res.obj: release\qrc_res.cpp 
 
 release\moc_mainwindow.obj: release\moc_mainwindow.cpp 
 
 release\moc_welcomeinterface.obj: release\moc_welcomeinterface.cpp 
+
+release\moc_gameclient.obj: release\moc_gameclient.cpp 
+
+release\moc_mytcpsocket.obj: release\moc_mytcpsocket.cpp 
 
 ####### Install
 

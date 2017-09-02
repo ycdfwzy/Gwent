@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,12 +29,16 @@ SOURCES += \
         mainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    welcomeinterface.cpp
+    welcomeinterface.cpp \
+    gameclient.cpp \
+    mytcpsocket.cpp
 
 HEADERS += \
         mainwindow.h \
     mainwindow.h \
-    welcomeinterface.h
+    welcomeinterface.h \
+    gameclient.h \
+    mytcpsocket.h
 
 FORMS += \
         mainwindow.ui

@@ -5,11 +5,12 @@
 #include <QtGui>
 #include <QtWidgets>
 #include "welcomeinterface.h"
-
+#include "gameclient.h"
+/*
 namespace Ui {
 class MainWindow;
 }
-
+*/
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    gameClient *mGameClient;
     enum GameState { Welcome, Playing, Replay, LastStand };
 
 public slots:
@@ -26,6 +27,7 @@ public slots:
 private:
     GameState mGameState;
     QWidget *mCurrentStateWidget;
+
 };
 
 #endif // MAINWINDOW_H

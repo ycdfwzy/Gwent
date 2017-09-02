@@ -258,6 +258,7 @@ Makefile: ..\Gwent\Gwent.pro "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmaind.prl" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.prl" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.prl" \
+		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Network.prl" \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.prl"
 	$(QMAKE) -o Makefile ..\Gwent\Gwent.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\mkspecs\features\spec_pre.prf":
@@ -443,6 +444,7 @@ Makefile: ..\Gwent\Gwent.pro "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\
 "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\qtmaind.prl":
 "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Widgets.prl":
 "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Gui.prl":
+"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Network.prl":
 "..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\lib\Qt5Core.prl":
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\Gwent\Gwent.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"

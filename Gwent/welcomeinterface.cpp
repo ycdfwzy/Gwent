@@ -1,27 +1,32 @@
 #include "welcomeinterface.h"
+#include "mainwindow.h"
+#include <QMessageBox>
+#include <QDebug>
 
-WelcomeInterface::WelcomeInterface(QWidget *parent) : QWidget(parent)
+WelcomeInterface::WelcomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
 {
-    /*QPalette palette;
-    QPixmap pixmap(":/images/welcome_background");
-    //palette.setBrush(QPalette::Window, QBrush(pixmap));
-    palette.setBrush(this->backgroundRole(), QBrush(pixmap));
-    this->setPalette(palette);
-    this->setAutoFillBackground(true);
-
-    this->setWindowFlags(Qt::WindowMinMaxButtonsHint);*/
-    //this->setObjectName("Welcome");
-    //this->setStyleSheet("WelcomeInterface#Welcome{border-image:url(qrc:/images/welcome_background)}");
-    //this->show();
+    mw = mw_;
+    this->setFocusPolicy(Qt::StrongFocus);
 }
 
+WelcomeInterface::~WelcomeInterface(){}
 
-WelcomeInterface::~WelcomeInterface(){
-
-}
-
-void WelcomeInterface::paintEvent(QPaintEvent *e)
-{
+void WelcomeInterface::paintEvent(QPaintEvent *e){
     QPainter painter(this);
     painter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/images/welcome_background"));
+}
+
+void WelcomeInterface::mousePressEvent(QMouseEvent *event){
+    if (event->button() == Qt::LeftButton){
+        QMessageBox::about(this, tr("mousepress"), tr("Press!"));
+        mw->mGameClient = new gameClient(mw);
+    }
+}
+
+void WelcomeInterface::keyPressEvent(QKeyEvent *event){
+    //qDebug() << event->key();
+    if (event->key() == Qt::Key_Return){
+        QMessageBox::about(this, tr("keypress"), tr("Press!"));
+        mw->mGameClient = new gameClient(mw);
+    }
 }
