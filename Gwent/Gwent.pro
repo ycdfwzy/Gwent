@@ -27,16 +27,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    welcomeinterface.cpp
 
 HEADERS += \
         mainwindow.h \
-    mainwindow.h
+    mainwindow.h \
+    welcomeinterface.h
 
 FORMS += \
         mainwindow.ui
 
 DISTFILES +=
 
-RC_FILE += \
-        res.rc
+RESOURCES += \
+    res.qrc

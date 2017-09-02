@@ -2,15 +2,13 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    mCurrentStateWidget(new Ui::MainWindow)
+    QMainWindow(parent)
 {
-    //mCurrentStateWidget = new QWidget;
-    mCurrentStateWidget->setupUi(this);
-
-    connect(mCurrentStateWidget->pushButton,SIGNAL(clicked()),this,SLOT(on_pushButton_clicked()));
-    setWindowTitle(tr("Gwent"));
-    this->resize(900, 600);
+    mCurrentStateWidget = nullptr;
+    this->switchstate(Welcome);
+    this->setWindowTitle(tr("Gwent"));
+    this->setWindowIcon(QIcon(QStringLiteral(":/images/icon")));
+    this->resize(960, 600);
 }
 
 MainWindow::~MainWindow()
@@ -18,8 +16,16 @@ MainWindow::~MainWindow()
     delete mCurrentStateWidget;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    this->resize(800, 600);
-    //QMessageBox::about(this, "Mess", "Clicked");
+void MainWindow::switchstate(MainWindow::GameState state){
+    if (mCurrentStateWidget == nullptr || mGameState != state){
+        mGameState = state;
+        switch (state) {
+        case Welcome:
+            mCurrentStateWidget = new WelcomeInterface(this);
+            this->setCentralWidget(mCurrentStateWidget);
+            break;
+        default:
+            break;
+        }
+    }
 }

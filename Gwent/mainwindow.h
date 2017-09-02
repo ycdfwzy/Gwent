@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QtWidgets>
+#include "welcomeinterface.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,11 +21,11 @@ public:
     enum GameState { Welcome, Playing, Replay, LastStand };
 
 public slots:
-    void on_pushButton_clicked();
+    void switchstate(MainWindow:: GameState state);
 
 private:
     GameState mGameState;
-    Ui::MainWindow *mCurrentStateWidget;
+    QWidget *mCurrentStateWidget;
 };
 
 #endif // MAINWINDOW_H

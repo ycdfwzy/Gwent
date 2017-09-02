@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="icon">images/gwent.ico</file>
+        <file alias="welcome_background">images/welcome.png</file>
+    </qresource>
+</RCC>
