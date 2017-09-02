@@ -31,14 +31,16 @@ SOURCES += \
     mainwindow.cpp \
     welcomeinterface.cpp \
     gameclient.cpp \
-    mytcpsocket.cpp
+    mytcpsocket.cpp \
+    homeinterface.cpp
 
 HEADERS += \
         mainwindow.h \
     mainwindow.h \
     welcomeinterface.h \
     gameclient.h \
-    mytcpsocket.h
+    mytcpsocket.h \
+    homeinterface.h
 
 FORMS += \
         mainwindow.ui

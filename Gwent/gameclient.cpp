@@ -20,5 +20,8 @@ gameClient::~gameClient(){}
 void gameClient::Read_Data(){
     QByteArray buffer = client->readAll();
     QString str = buffer;
-    qDebug() << str;
+    if (str.compare("welcome!") == 0){
+        mw->switchstate(MainWindow::Home);
+    }
+    //qDebug() << str;
 }

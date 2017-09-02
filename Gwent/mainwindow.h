@@ -6,6 +6,7 @@
 #include <QtWidgets>
 #include "welcomeinterface.h"
 #include "gameclient.h"
+#include "homeinterface.h"
 /*
 namespace Ui {
 class MainWindow;
@@ -19,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     gameClient *mGameClient;
-    enum GameState { Welcome, Playing, Replay, LastStand };
+    enum GameState { Welcome, Home, Playing, Replay};
 
 public slots:
     void switchstate(MainWindow:: GameState state);

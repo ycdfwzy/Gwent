@@ -8,6 +8,11 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QDialog>
+#include <QLineEdit>
+#include <QLabel>
+#include <QPushButton>
+#include <QLayout>
 
 class MainWindow;
 
@@ -18,6 +23,8 @@ public:
     explicit WelcomeInterface(MainWindow *mw_, QWidget *parent = nullptr);
     ~WelcomeInterface();
     MainWindow *mw;
+    void createDialog();
+    void tryconnect();
 
 protected:
     void WelcomeInterface::paintEvent(QPaintEvent *e);
@@ -28,7 +35,10 @@ signals:
 public slots:
 
 private:
-
+    QDialog *mdialog;
+    QLineEdit *ledtusername, *ledtpassword;
+    QLabel *lbusername, *lbpassword;
+    QPushButton *btnlogin;
 };
 
 #endif // WELCOMEINTERFACE_H
