@@ -29,7 +29,10 @@ void MainWindow::switchstate(MainWindow::GameState state){
         case Home:
             mCurrentStateWidget = new HomeInterface(this);
             this->setCentralWidget(mCurrentStateWidget);
-        case Playing:
+            break;
+        case Waiting:
+            break;
+        case GameOver:
             break;
         default:
             break;

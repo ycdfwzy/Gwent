@@ -2,8 +2,20 @@
 #define HOMEINTERFACE_H
 
 #include <QWidget>
+#include <QPushButton>
+#include <QLayout>
 
 class MainWindow;
+
+class MyPushButton : public QPushButton{
+    Q_OBJECT
+public:
+    MyPushButton();
+    ~MyPushButton();
+
+protected:
+    void paintEvent(QPaintEvent*);
+};
 
 class HomeInterface : public QWidget
 {
@@ -12,6 +24,15 @@ public:
     explicit HomeInterface(MainWindow *mw_, QWidget *parent = nullptr);
     ~HomeInterface();
     MainWindow *mw;
+    MyPushButton *btnplay, *btnchoose;
+
+    void btnplayClicked();
+    void btnchooseClicked();
+
+protected:
+    void paintEvent(QPaintEvent* e);
+
+
 signals:
 
 public slots:

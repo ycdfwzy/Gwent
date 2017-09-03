@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     gameClient *mGameClient;
-    enum GameState { Welcome, Home, Playing, Replay};
+    enum GameState { Welcome, Home, Waiting, Playing, GameOver, ChooseDeck};
 
 public slots:
     void switchstate(MainWindow:: GameState state);

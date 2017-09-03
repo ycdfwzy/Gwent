@@ -2,5 +2,8 @@
     <qresource prefix="/images">
         <file alias="icon">images/gwent.ico</file>
         <file alias="welcome_background">images/welcome.png</file>
+        <file alias="home_background">images/home.jpg</file>
+        <file alias="btnplay">images/play.png</file>
+        <file alias="btnchoose">images/choose.png</file>
     </qresource>
 </RCC>
