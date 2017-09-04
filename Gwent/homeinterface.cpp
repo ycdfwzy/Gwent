@@ -6,7 +6,7 @@
 #include <QPalette>
 #include <QBrush>
 #include <QStyleOption>
-
+/*
 MyPushButton::MyPushButton(){}
 
 MyPushButton::~MyPushButton(){}
@@ -17,21 +17,21 @@ void MyPushButton::paintEvent(QPaintEvent *){
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
-
+*/
 HomeInterface::HomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
 {
     mw = mw_;
-    btnplay = new MyPushButton();
+    btnplay = new QPushButton();
     //btnplay->setAutoFillBackground(true);
-    btnplay->setStyleSheet("background-color: gainsboro;border-image: url(:/images/btnplay);");
+    btnplay->setStyleSheet("border-image: url(:/images/btnplay);");
     btnplay->setFixedSize(330, 220);
-    connect(btnplay, &MyPushButton::clicked, this, &HomeInterface::btnplayClicked);
+    connect(btnplay, &QPushButton::clicked, this, &HomeInterface::btnplayClicked);
 
-    btnchoose = new MyPushButton();
+    btnchoose = new QPushButton();
     //btnchoose->setAutoFillBackground(true);
-    btnchoose->setStyleSheet("background-color: gainsboro;border-image: url(:/images/btnchoose);");
+    btnchoose->setStyleSheet("border-image: url(:/images/btnchoose);");
     btnchoose->setFixedSize(330, 220);
-    connect(btnchoose, &MyPushButton::clicked, this, &HomeInterface::btnchooseClicked);
+    connect(btnchoose, &QPushButton::clicked, this, &HomeInterface::btnchooseClicked);
 
     QGridLayout *gl = new QGridLayout;
     gl->setColumnStretch(0, 100);
@@ -47,11 +47,10 @@ HomeInterface::HomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
 
 HomeInterface::~HomeInterface(){}
 
-void HomeInterface::paintEvent(QPaintEvent *e){
+void HomeInterface::paintEvent(QPaintEvent*){
     QPainter painter(this);
     painter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/images/home_background"));
 }
-
 
 void HomeInterface::btnplayClicked(){
     mw->switchstate(MainWindow::Waiting);

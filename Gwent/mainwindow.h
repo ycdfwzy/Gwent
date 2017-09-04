@@ -7,6 +7,7 @@
 #include "welcomeinterface.h"
 #include "gameclient.h"
 #include "homeinterface.h"
+#include "waitinterface.h"
 /*
 namespace Ui {
 class MainWindow;

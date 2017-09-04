@@ -32,7 +32,8 @@ SOURCES += \
     welcomeinterface.cpp \
     gameclient.cpp \
     mytcpsocket.cpp \
-    homeinterface.cpp
+    homeinterface.cpp \
+    waitinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     welcomeinterface.h \
     gameclient.h \
     mytcpsocket.h \
-    homeinterface.h
+    homeinterface.h \
+    waitinterface.h
 
 FORMS += \
         mainwindow.ui

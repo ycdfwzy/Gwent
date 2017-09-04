@@ -27,7 +27,7 @@ public:
     void tryconnect();
 
 protected:
-    void WelcomeInterface::paintEvent(QPaintEvent *e);
+    void WelcomeInterface::paintEvent(QPaintEvent*);
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
 signals:

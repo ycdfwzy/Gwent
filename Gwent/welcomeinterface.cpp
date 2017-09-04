@@ -11,7 +11,7 @@ WelcomeInterface::WelcomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(p
 
 WelcomeInterface::~WelcomeInterface(){}
 
-void WelcomeInterface::paintEvent(QPaintEvent *e){
+void WelcomeInterface::paintEvent(QPaintEvent*){
     QPainter painter(this);
     painter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/images/welcome_background"));
 }
@@ -66,5 +66,8 @@ void WelcomeInterface::createDialog(){
 }
 
 void WelcomeInterface::tryconnect(){
-    mw->mGameClient = new gameClient(mw);
+    //mw->mGameClient = new gameClient(mw);
+    QString msg = "I" + ledtusername->text() + " " + ledtpassword->text();
+    qDebug() << msg;
+    mw->mGameClient->Send_Date(msg);
 }

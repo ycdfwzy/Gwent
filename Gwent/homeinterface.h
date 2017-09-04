@@ -6,7 +6,7 @@
 #include <QLayout>
 
 class MainWindow;
-
+/*
 class MyPushButton : public QPushButton{
     Q_OBJECT
 public:
@@ -16,7 +16,7 @@ public:
 protected:
     void paintEvent(QPaintEvent*);
 };
-
+*/
 class HomeInterface : public QWidget
 {
     Q_OBJECT
@@ -24,13 +24,13 @@ public:
     explicit HomeInterface(MainWindow *mw_, QWidget *parent = nullptr);
     ~HomeInterface();
     MainWindow *mw;
-    MyPushButton *btnplay, *btnchoose;
+    QPushButton *btnplay, *btnchoose;
 
     void btnplayClicked();
     void btnchooseClicked();
 
 protected:
-    void paintEvent(QPaintEvent* e);
+    void paintEvent(QPaintEvent*);
 
 
 signals:

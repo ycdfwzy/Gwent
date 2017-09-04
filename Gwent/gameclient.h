@@ -16,6 +16,7 @@ public:
     ~gameClient();
 
     void Read_Data();
+    void Send_Date(QString);
 
 private:
     MyTCPSocket *client;
