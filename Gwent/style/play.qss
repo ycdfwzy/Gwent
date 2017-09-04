@@ -1,0 +1,9 @@
+QPushButton{
+    border-image: url(:/images/btnplay);
+}
+QPushButton:hover{
+    border-image: url(:/images/playhover);
+}
+QPushButton:pressed{
+    border-image: url(:/images/playhover);
+}

@@ -211,11 +211,15 @@ compiler_rcc_clean:
 debug\qrc_res.cpp: ..\Gwent\res.qrc \
 		"..\..\..\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\rcc.exe" \
 		..\Gwent\images\waiting.png \
+		..\Gwent\images\choose2.png \
 		..\Gwent\images\welcome.png \
 		..\Gwent\images\gwent.ico \
 		..\Gwent\images\play.png \
 		..\Gwent\images\home.jpg \
-		..\Gwent\images\choose.png
+		..\Gwent\images\choose.png \
+		..\Gwent\images\play2.png \
+		..\Gwent\style\play.qss \
+		..\Gwent\style\choose.qss
 	"D:\Program Files (x86)\Qt\5.9.1\msvc2015_64\bin\rcc.exe" -name res ..\Gwent\res.qrc -o debug\qrc_res.cpp
 
 compiler_moc_predefs_make_all: debug\moc_predefs.h

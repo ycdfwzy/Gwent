@@ -6,5 +6,11 @@
         <file alias="btnplay">images/play.png</file>
         <file alias="btnchoose">images/choose.png</file>
         <file alias="waiting">images/waiting.png</file>
+        <file alias="playhover">images/play2.png</file>
+        <file alias="choosehover">images/choose2.png</file>
+    </qresource>
+    <qresource prefix="/style">
+        <file alias="playstyle">style/play.qss</file>
+        <file alias="choosestyle">style/choose.qss</file>
     </qresource>
 </RCC>

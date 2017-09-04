@@ -1,0 +1,9 @@
+QPushButton{
+    border-image: url(:/images/btnchoose);
+}
+QPushButton:hover{
+    border-image: url(:/images/choosehover);
+}
+QPushButton:pressed{
+    border-image: url(:/images/choosehover);
+}

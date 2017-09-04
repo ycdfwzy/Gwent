@@ -22,14 +22,20 @@ HomeInterface::HomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
 {
     mw = mw_;
     btnplay = new QPushButton();
-    //btnplay->setAutoFillBackground(true);
-    btnplay->setStyleSheet("border-image: url(:/images/btnplay);");
+    QFile qssplay(":/style/playstyle");
+    qssplay.open(QFile::ReadOnly);
+    btnplay->setStyleSheet(qssplay.readAll());
+    qssplay.close();
+    //btnplay->setStyleSheet("border-image: url(:/images/btnplay);");
     btnplay->setFixedSize(330, 220);
     connect(btnplay, &QPushButton::clicked, this, &HomeInterface::btnplayClicked);
 
     btnchoose = new QPushButton();
-    //btnchoose->setAutoFillBackground(true);
-    btnchoose->setStyleSheet("border-image: url(:/images/btnchoose);");
+    QFile qsschoose(":/style/choosestyle");
+    qsschoose.open(QFile::ReadOnly);
+    btnchoose->setStyleSheet(qsschoose.readAll());
+    qsschoose.close();
+    //btnchoose->setStyleSheet("border-image: url(:/images/btnchoose);");
     btnchoose->setFixedSize(330, 220);
     connect(btnchoose, &QPushButton::clicked, this, &HomeInterface::btnchooseClicked);
 
