@@ -17,9 +17,10 @@ public:
 
     void Read_Data();
     void Send_Date(QString);
+    MyTCPSocket *client;
 
 private:
-    MyTCPSocket *client;
+
     MainWindow *mw;
 };
 

@@ -6,12 +6,14 @@
 gameClient::gameClient(MainWindow *mw_){
     mw = mw_;
     client = new MyTCPSocket();
+    //qDebug() << client->socketDescriptor();
     client->connectToHost("192.168.13.1", 8888);
     if(!client->waitForConnected(30000)){
         QMessageBox::critical(mw, QObject::tr("Connection Error"), QObject::tr("Server not found!"));
         return;
     }
     //client->write();
+    //qDebug() << client->socketDescriptor();
     QObject::connect(client, &MyTCPSocket::readyReadClient, this, &gameClient::Read_Data);
 }
 

@@ -5,7 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     mCurrentStateWidget = nullptr;
-    mGameClient = new gameClient(this);
+    //mGameClient = new gameClient(this);
+    mGameClient = nullptr;
     this->switchstate(Welcome);
     this->setWindowTitle(tr("Gwent"));
     this->setWindowIcon(QIcon(QStringLiteral(":/images/icon")));

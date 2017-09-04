@@ -33,7 +33,8 @@ SOURCES += \
     gameclient.cpp \
     mytcpsocket.cpp \
     homeinterface.cpp \
-    waitinterface.cpp
+    waitinterface.cpp \
+    player.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     gameclient.h \
     mytcpsocket.h \
     homeinterface.h \
-    waitinterface.h
+    waitinterface.h \
+    player.h
 
 FORMS += \
         mainwindow.ui
