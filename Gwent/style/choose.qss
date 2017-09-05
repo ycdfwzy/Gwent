@@ -1,9 +1,9 @@
 QPushButton{
-    border-image: url(:/images/btnchoose);
+    border-image: url(:/images/btnedit);
 }
 QPushButton:hover{
-    border-image: url(:/images/choosehover);
+    border-image: url(:/images/edithover);
 }
 QPushButton:pressed{
-    border-image: url(:/images/choosehover);
+    border-image: url(:/images/edithover);
 }

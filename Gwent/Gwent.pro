@@ -34,7 +34,8 @@ SOURCES += \
     mytcpsocket.cpp \
     homeinterface.cpp \
     waitinterface.cpp \
-    player.cpp
+    player.cpp \
+    editdeckinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS += \
     mytcpsocket.h \
     homeinterface.h \
     waitinterface.h \
-    player.h
+    player.h \
+    editdeckinterface.h
 
 FORMS += \
         mainwindow.ui

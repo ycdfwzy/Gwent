@@ -67,8 +67,12 @@ void WelcomeInterface::createDialog(){
 }
 
 void WelcomeInterface::tryconnect(){
-    mw->mGameClient = new gameClient(mw);
-    if (mw->mGameClient->client->socketDescriptor() == -1) return;
+    if (mw->mGameClient == nullptr)
+        mw->mGameClient = new gameClient(mw);
+    if (mw->mGameClient->client->socketDescriptor() == -1){
+        //mw->
+        return;
+    }
     QString msg = "I" + ledtusername->text() + " " + ledtpassword->text();
     qDebug() << msg;
     mw->mGameClient->Send_Date(msg);

@@ -24,10 +24,10 @@ public:
     explicit HomeInterface(MainWindow *mw_, QWidget *parent = nullptr);
     ~HomeInterface();
     MainWindow *mw;
-    QPushButton *btnplay, *btnchoose;
+    QPushButton *btnplay, *btnedit;
 
     void btnplayClicked();
-    void btnchooseClicked();
+    void btneditClicked();
 
 protected:
     void paintEvent(QPaintEvent*);

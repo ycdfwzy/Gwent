@@ -39,6 +39,8 @@ void MainWindow::switchstate(MainWindow::GameState state){
             break;
         case GameOver:
             break;
+        case EditDeck:
+            break;
         default:
             break;
         }
