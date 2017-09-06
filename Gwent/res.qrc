@@ -2,15 +2,33 @@
     <qresource prefix="/images">
         <file alias="icon">images/gwent.ico</file>
         <file alias="welcome_background">images/welcome.png</file>
-        <file alias="home_background">images/home.jpg</file>
         <file alias="btnplay">images/play.png</file>
         <file alias="btnedit">images/choose.png</file>
         <file alias="waiting">images/waiting.png</file>
         <file alias="playhover">images/play2.png</file>
         <file alias="edithover">images/choose2.png</file>
+        <file alias="armor">images/armor.png</file>
+        <file alias="brownframe">images/brownframe.png</file>
+        <file alias="digit0">images/digit0.png</file>
+        <file alias="digit1">images/digit1.png</file>
+        <file alias="digit2">images/digit2.png</file>
+        <file alias="digit3">images/digit3.png</file>
+        <file alias="digit4">images/digit4.png</file>
+        <file alias="digit5">images/digit5.png</file>
+        <file alias="digit6">images/digit6.png</file>
+        <file alias="digit7">images/digit7.png</file>
+        <file alias="digit8">images/digit8.png</file>
+        <file alias="digit9">images/digit9.png</file>
+        <file alias="editdeck">images/editdeck.png</file>
+        <file alias="goldframe">images/goldframe.png</file>
+        <file alias="silverframe">images/silverframe.png</file>
+        <file alias="home_background">images/home.png</file>
+        <file alias="btnmatch">images/match.png</file>
+        <file alias="matchhover">images/match2.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>
         <file alias="editstyle">style/choose.qss</file>
+        <file alias="matchstyle">style/match.qss</file>
     </qresource>
 </RCC>

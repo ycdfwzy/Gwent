@@ -21,23 +21,31 @@ void MyPushButton::paintEvent(QPaintEvent *){
 HomeInterface::HomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
 {
     mw = mw_;
-    btnplay = new QPushButton();
+    btnplay = new QPushButton(this);
     QFile qssplay(":/style/playstyle");
     qssplay.open(QFile::ReadOnly);
     btnplay->setStyleSheet(qssplay.readAll());
     qssplay.close();
-    btnplay->setFixedSize(330, 220);
+    btnplay->setGeometry(this->width()*64/1920, this->height()*312/1080, this->width()*617/1920, this->height()*435/1080);
     connect(btnplay, &QPushButton::clicked, this, &HomeInterface::btnplayClicked);
 
-    btnedit = new QPushButton();
+    btnmatch = new QPushButton(this);
+    QFile qssmatch(":/style/matchstyle");
+    qssmatch.open(QFile::ReadOnly);
+    btnmatch->setStyleSheet(qssmatch.readAll());
+    qssmatch.close();
+    btnmatch->setGeometry(this->width()*716/1920, this->height()*312/1080, this->width()*306/1920, this->height()*435/1080);
+    connect(btnmatch, &QPushButton::clicked, this, &HomeInterface::btnmatchClicked);
+
+    btnedit = new QPushButton(this);
     QFile qssedit(":/style/editstyle");
     qssedit.open(QFile::ReadOnly);
     btnedit->setStyleSheet(qssedit.readAll());
     qssedit.close();
-    btnedit->setFixedSize(330, 220);
+    btnedit->setGeometry(this->width()*1060/1920, this->height()*312/1080, this->width()*617/1920, this->height()*435/1080);
     connect(btnedit, &QPushButton::clicked, this, &HomeInterface::btneditClicked);
 
-    QGridLayout *gl = new QGridLayout;
+    /*QGridLayout *gl = new QGridLayout;
     gl->setColumnStretch(0, 100);
     gl->setColumnStretch(1, 100);
     gl->setColumnStretch(2, 100);
@@ -46,7 +54,7 @@ HomeInterface::HomeInterface(MainWindow *mw_, QWidget *parent) : QWidget(parent)
     gl->setRowStretch(2, 100);
     gl->addWidget(btnplay, 2, 0, 1, 1);
     gl->addWidget(btnedit, 2, 2, 1, 1);
-    this->setLayout(gl);
+    this->setLayout(gl);*/
 }
 
 HomeInterface::~HomeInterface(){}
@@ -56,10 +64,20 @@ void HomeInterface::paintEvent(QPaintEvent*){
     painter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/images/home_background"));
 }
 
+void HomeInterface::resizeEvent(QResizeEvent *){
+    btnplay->setGeometry(this->width()*64/1920, this->height()*312/1080, this->width()*617/1920, this->height()*435/1080);
+    btnedit->setGeometry(this->width()*1060/1920, this->height()*312/1080, this->width()*617/1920, this->height()*435/1080);
+    btnmatch->setGeometry(this->width()*716/1920, this->height()*312/1080, this->width()*306/1920, this->height()*435/1080);
+}
+
 void HomeInterface::btnplayClicked(){
     mw->switchstate(MainWindow::Waiting);
 }
 
 void HomeInterface::btneditClicked(){
     mw->switchstate(MainWindow::EditDeck);
+}
+
+void HomeInterface::btnmatchClicked(){
+    mw->switchstate(MainWindow::Waiting);
 }

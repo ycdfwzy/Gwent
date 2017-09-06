@@ -24,14 +24,15 @@ public:
     explicit HomeInterface(MainWindow *mw_, QWidget *parent = nullptr);
     ~HomeInterface();
     MainWindow *mw;
-    QPushButton *btnplay, *btnedit;
+    QPushButton *btnplay, *btnedit, *btnmatch;
 
     void btnplayClicked();
     void btneditClicked();
+    void btnmatchClicked();
 
 protected:
-    void paintEvent(QPaintEvent*);
-
+    void paintEvent(QPaintEvent *);
+    void resizeEvent(QResizeEvent *);
 
 signals:
 

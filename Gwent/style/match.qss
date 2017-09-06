@@ -1,0 +1,9 @@
+QPushButton{
+    border-image: url(:/images/btnmatch);
+}
+QPushButton:hover{
+    border-image: url(:/images/matchhover);
+}
+QPushButton:pressed{
+    border-image: url(:/images/matchhover);
+}

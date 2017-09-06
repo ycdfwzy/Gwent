@@ -2,6 +2,7 @@
 #define EDITDECKINTERFACE_H
 
 #include <QWidget>
+#include <QListWidget>
 
 class MainWindow;
 
@@ -16,6 +17,13 @@ public:
 signals:
 
 public slots:
+
+protected:
+    void paintEvent(QPaintEvent *);
+    void resizeEvent(QResizeEvent *);
+
+private:
+    QListWidget *deckwindow;
 };
 
 #endif // EDITDECKINTERFACE_H

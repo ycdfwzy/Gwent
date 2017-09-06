@@ -25,24 +25,23 @@ void MainWindow::switchstate(MainWindow::GameState state){
         switch (state) {
         case Welcome:
             mCurrentStateWidget = new WelcomeInterface(this);
-            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Home:
             mCurrentStateWidget = new HomeInterface(this);
-            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Waiting:
             mCurrentStateWidget = new WaitInterface(this);
-            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Playing:
             break;
         case GameOver:
             break;
         case EditDeck:
+            mCurrentStateWidget = new EditDeckInterface(this);
             break;
         default:
             break;
         }
+        this->setCentralWidget(mCurrentStateWidget);
     }
 }
