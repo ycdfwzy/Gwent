@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    main.cpp \
     mainwindow.cpp \
     welcomeinterface.cpp \
     gameclient.cpp \
@@ -37,11 +35,12 @@ SOURCES += \
     player.cpp \
     editdeckinterface.cpp \
     cards/card.cpp \
-    cards/deck.cpp
+    cards/deck.cpp \
+    cards/showcards.cpp \
+    cards/cardlabel.cpp
 
 HEADERS += \
         mainwindow.h \
-    mainwindow.h \
     welcomeinterface.h \
     gameclient.h \
     mytcpsocket.h \
@@ -50,7 +49,9 @@ HEADERS += \
     player.h \
     editdeckinterface.h \
     cards/card.h \
-    cards/deck.h
+    cards/deck.h \
+    cards/showcards.h \
+    cards/cardlabel.h
 
 FORMS += \
         mainwindow.ui

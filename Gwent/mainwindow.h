@@ -26,6 +26,7 @@ public:
     enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck};
 
     void init_player(const QString &str);
+    Player* get_player()const;
 
 public slots:
     void switchstate(MainWindow:: GameState state);

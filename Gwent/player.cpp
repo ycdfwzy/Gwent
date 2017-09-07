@@ -19,12 +19,13 @@ Player::Player(gameClient *client_, const QString &Alldata, QObject *parent) : Q
                 defeatgames = info.take("defeatgames").toInt();
 
                 //QJsonValue decksJsonValue = info.take("decks");
-                QJsonArray decks_ = info.take("decks").toArray();
-                int sz = decks_.size();
+                QJsonObject decks_ = info.take("decks").toObject();
                 Deck *dk;
+                QStringList ks = decks_.keys();
+                int sz = ks.size();
                 for (int i = 0; i < sz; ++i){
-                    //new deck
-                    dk = new Deck(decks_.at(i));
+                    QString tmp = ks.at(i);
+                    dk = new Deck(tmp , decks_.value(tmp));
                     decks.append(dk);
                 }
             }
@@ -35,3 +36,12 @@ Player::Player(gameClient *client_, const QString &Alldata, QObject *parent) : Q
 }
 
 Player::~Player(){}
+
+
+QString Player::get_name()const{return name;}
+int Player::get_totalgames()const{return totalgames;}
+int Player::get_victorygames()const{return victorygames;}
+int Player::get_drawgames()const{return drawgames;}
+int Player::get_defeatgames()const{return defeatgames;}
+QList<Deck*>& Player::get_decks(){return decks;}
+QList<Deck*>* Player::get_decks_pointer(){return &decks;}

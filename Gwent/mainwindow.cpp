@@ -50,3 +50,5 @@ void MainWindow::switchstate(MainWindow::GameState state){
         this->setCentralWidget(mCurrentStateWidget);
     }
 }
+
+Player* MainWindow::get_player()const{return mplayer;}

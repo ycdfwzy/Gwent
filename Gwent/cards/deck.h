@@ -13,16 +13,19 @@ class Deck : public QObject
 {
     Q_OBJECT
 public:
-    explicit Deck(QJsonValue &info, QObject *parent = nullptr);
+    explicit Deck(const QString &name_, QJsonValue &info, QObject *parent = nullptr);
 
+    QString get_name()const;
+    Card* get_leader()const;
+    QList<Card*>& get_cards();
 signals:
 
 public slots:
 
 private:
     QString name;
-    int leader;
-    QList<int> cards;
+    Card *leader;
+    QList<Card*> cards;
 };
 
 #endif // DECK_H

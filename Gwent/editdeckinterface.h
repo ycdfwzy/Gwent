@@ -2,8 +2,12 @@
 #define EDITDECKINTERFACE_H
 
 #include <QWidget>
-#include <QListWidget>
+#include <QScrollArea>
 #include <QPainter>
+#include <QList>
+#include "cards/showcards.h"
+#include "cards/card.h"
+#include "cards/deck.h"
 
 class MainWindow;
 
@@ -24,7 +28,9 @@ protected:
     void resizeEvent(QResizeEvent *);
 
 private:
-    QListWidget *deckwindow;
+    QScrollArea *deckwindow;
+    QList<Deck*> *decklist;
+    ShowCards *sc;
 };
 
 #endif // EDITDECKINTERFACE_H

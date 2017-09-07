@@ -55,14 +55,17 @@
         <file>cards/images/xiao3wu4yao1.png</file>
         <file>cards/images/xie4zhi1zhu1.png</file>
         <file>cards/images/xie4zhi1zhu1ju4shou4.png</file>
-        <file>cards/images/xie4zhi1zhu1you4chong2.png</file>
         <file>cards/images/ying1shen1nv3yao1dan4.png</file>
         <file>cards/images/ying1shen1nv3yao1you4zai3.png</file>
         <file>cards/images/zhi3hui3hao4jiao3.png</file>
+        <file>cards/images/ni2si1li3la1.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>
         <file alias="editstyle">style/choose.qss</file>
         <file alias="matchstyle">style/match.qss</file>
+    </qresource>
+    <qresource prefix="/data">
+        <file alias="cardinfo">cards/cardinfo.json</file>
     </qresource>
 </RCC>

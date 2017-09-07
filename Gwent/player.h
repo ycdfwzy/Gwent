@@ -22,12 +22,20 @@ public:
 
     gameClient *client;
 
+    QString get_name()const;
+    int get_totalgames()const;
+    int get_victorygames()const;
+    int get_drawgames()const;
+    int get_defeatgames()const;
+    QList<Deck*>& get_decks();
+    QList<Deck*>* get_decks_pointer();
+
 signals:
 
 public slots:
 private:
     QString name;
-    int totalgames, victorygames, drawgames,defeatgames;
+    int totalgames, victorygames, drawgames, defeatgames;
     QList<Deck*> decks;
 };
 

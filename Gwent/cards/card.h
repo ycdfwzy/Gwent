@@ -4,22 +4,37 @@
 #include <QObject>
 #include <QPixmap>
 #include <QPainter>
+#include <QJsonArray>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonValue>
 
 class Card : public QObject
 {
     Q_OBJECT
 public:
     explicit Card(int id, QObject *parent = nullptr);
-
-    QPixmap& card_picture();
+    Card(const Card &c);
+    QString get_name() const;
+    QString get_faction() const;
+    QString get_picpath() const;
+    QString get_color() const;
+    QString get_rule() const;
+    QString get_type() const;
+    int get_id() const;
+    int get_baseblood() const;
+    int get_boostblood() const;
+    int get_armor() const;
 
 signals:
 
 public slots:
 
 private:
-    QString name;
-    QString path;
+    QString name, faction;
+    QString picpath, color;
     QString rule, type;
     int id, baseblood, boostblood, armor;
 };
