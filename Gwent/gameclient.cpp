@@ -22,12 +22,21 @@ gameClient::~gameClient(){}
 void gameClient::Read_Data(){
     QByteArray buffer = client->readAll();
     QString str = buffer;
+    //qDebug() << str;
     if (str.compare("Sorry!") == 0){
         QMessageBox::critical(mw, QObject::tr("Error"), QObject::tr("Please check your ID and password, then try agian!"));
         return;
     } else
-    if (str.compare("Welcome!") == 0){
+    if (str.startsWith("Welcome!")){
         mw->switchstate(MainWindow::Home);
+        if (str.startsWith("Welcome!Data:")){
+            str = str.mid(13);
+            mw->init_player(str);
+        }
+    } else
+    if (str.startsWith("Data:")){
+        str = str.mid(5);
+        mw->init_player(str);
     }
 
     //qDebug() << str;
@@ -35,4 +44,5 @@ void gameClient::Read_Data(){
 
 void gameClient::Send_Date(QString msg){
     client->write(msg.toLatin1());
+    client->waitForBytesWritten();
 }

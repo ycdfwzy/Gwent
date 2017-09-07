@@ -9,6 +9,7 @@
 #include "homeinterface.h"
 #include "waitinterface.h"
 #include "editdeckinterface.h"
+#include "player.h"
 /*
 namespace Ui {
 class MainWindow;
@@ -24,12 +25,15 @@ public:
     gameClient *mGameClient;
     enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck};
 
+    void init_player(const QString &str);
+
 public slots:
     void switchstate(MainWindow:: GameState state);
 
 private:
     GameState mGameState;
     QWidget *mCurrentStateWidget;
+    Player *mplayer;
 
 };
 

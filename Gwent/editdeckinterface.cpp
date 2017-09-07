@@ -12,6 +12,8 @@ EditDeckInterface::EditDeckInterface(MainWindow *mw_, QWidget *parent) : QWidget
 
     deckwindow->setGeometry(0, this->height()*240/1080, this->width(), this->height()*(900-240)/1080);
 
+    QListWidgetItem *w = new QListWidgetItem(deckwindow);
+    w->setIcon(QIcon());
 }
 
 void EditDeckInterface::resizeEvent(QResizeEvent *){

@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     mCurrentStateWidget = nullptr;
+    mplayer = nullptr;
     //mGameClient = new gameClient(this);
     mGameClient = nullptr;
     this->switchstate(Welcome);
@@ -16,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete mCurrentStateWidget;
+}
+
+void MainWindow::init_player(const QString &str){
+    mplayer = new Player(mGameClient, str);
 }
 
 void MainWindow::switchstate(MainWindow::GameState state){

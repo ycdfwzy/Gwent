@@ -35,7 +35,9 @@ SOURCES += \
     homeinterface.cpp \
     waitinterface.cpp \
     player.cpp \
-    editdeckinterface.cpp
+    editdeckinterface.cpp \
+    cards/card.cpp \
+    cards/deck.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +48,9 @@ HEADERS += \
     homeinterface.h \
     waitinterface.h \
     player.h \
-    editdeckinterface.h
+    editdeckinterface.h \
+    cards/card.h \
+    cards/deck.h
 
 FORMS += \
         mainwindow.ui
