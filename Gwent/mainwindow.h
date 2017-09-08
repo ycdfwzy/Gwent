@@ -23,7 +23,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     gameClient *mGameClient;
-    enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck};
+    enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck, EditCertainDeck};
 
     void init_player(const QString &str);
     Player* get_player()const;

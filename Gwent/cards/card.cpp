@@ -19,7 +19,7 @@ Card::Card(int id, QObject *parent) : QObject(parent)
 
                     QJsonValue all = info.take(QString::number(id));
                     if (all.isObject()){
-                        qDebug() << "isObject";
+                        //qDebug() << "isObject";
                         QJsonObject tmp = all.toObject();
                         name = tmp.take("name_cn").toVariant().toString();
                         picpath = tmp.take("picpath").toVariant().toString();
@@ -28,7 +28,7 @@ Card::Card(int id, QObject *parent) : QObject(parent)
                         color = tmp.take("color").toVariant().toString();
                         faction = tmp.take("faction").toVariant().toString();
                         baseblood = tmp.take("boold").toVariant().toInt();
-                        qDebug() << name;
+                        //qDebug() << name;
                     }
                 }
             }

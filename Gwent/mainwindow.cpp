@@ -43,7 +43,12 @@ void MainWindow::switchstate(MainWindow::GameState state){
             break;
         case EditDeck:
             mCurrentStateWidget = new EditDeckInterface(this);
+            this->setMouseTracking(true);
             break;
+        /*case EditCertainDeck:
+            mCurrentStateWidget = new EditCertainDeckInterface(this);
+            this->setMouseTracking(true);
+            break;*/
         default:
             break;
         }

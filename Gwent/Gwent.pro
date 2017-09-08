@@ -36,8 +36,10 @@ SOURCES += \
     editdeckinterface.cpp \
     cards/card.cpp \
     cards/deck.cpp \
-    cards/showcards.cpp \
-    cards/cardlabel.cpp
+    cards/cardlabelchoosedeck.cpp \
+    cards/showcardsalldecks.cpp \
+    cards/showcardsindeck.cpp \
+    cards/cardlabeleditcards.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,8 +52,10 @@ HEADERS += \
     editdeckinterface.h \
     cards/card.h \
     cards/deck.h \
-    cards/showcards.h \
-    cards/cardlabel.h
+    cards/cardlabelchoosdeck.h \
+    cards/showcardsalldecks.h \
+    cards/showcardsindeck.h \
+    cards/cardlabeleditcards.h
 
 FORMS += \
         mainwindow.ui
