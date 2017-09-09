@@ -13,11 +13,16 @@ class ShowCardsInDeck : public QWidget
     Q_OBJECT
 public:
     ShowCardsInDeck(Deck* deck, QWidget* parent = nullptr);
+    ShowCardsInDeck(QWidget* parent = nullptr);
 
+    void changeDeck(Deck* deck);
     void Resize(int w, int h);
     void mouseMoveEvent(QMouseEvent*);
     void addonecard(Card* card_);
     void removecard(Card* card_);
+    QList<Card*>* get_cardlist();
+    QString get_name();
+    Card* get_leader();
 
 signals:
     void send_click(Card* card_);

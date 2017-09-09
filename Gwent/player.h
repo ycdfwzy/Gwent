@@ -10,6 +10,7 @@
 #include <QVariantMap>
 #include <QList>
 #include "cards/deck.h"
+#include "cards/card.h"
 
 class gameClient;
 
@@ -27,8 +28,11 @@ public:
     int get_victorygames()const;
     int get_drawgames()const;
     int get_defeatgames()const;
+    int get_nextdeckname();
+    bool update_deck(QString name, Card* leader, QList<Card*> *cardlist);
     QList<Deck*>& get_decks();
     QList<Deck*>* get_decks_pointer();
+
 
 signals:
 
@@ -37,6 +41,7 @@ private:
     QString name;
     int totalgames, victorygames, drawgames, defeatgames;
     QList<Deck*> decks;
+    int name_helper;
 };
 
 #endif // PLAYER_H

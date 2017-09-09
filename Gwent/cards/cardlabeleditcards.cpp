@@ -21,11 +21,12 @@ CardLabelEditCards::CardLabelEditCards(Card *card_, QWidget *parent):card(card_)
 
 
 void CardLabelEditCards::mouseMoveEvent(QMouseEvent *){
+    //qDebug() << "hover";
     emit behovered(card);
 }
 
 void CardLabelEditCards::mousePressEvent(QMouseEvent *){
-    emit behovered(card);
+    emit bepressed(card);
 }
 
 void CardLabelEditCards::paintEvent(QPaintEvent *){

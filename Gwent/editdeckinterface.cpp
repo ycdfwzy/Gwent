@@ -11,7 +11,9 @@ EditDeckInterface::EditDeckInterface(MainWindow *mw_, QWidget *parent) : QWidget
 
     state = 0; // deckwindow
     decklist = mw->get_player()->get_decks_pointer();
+
     deckwindow = new QScrollArea(this);
+    deckwindow->horizontalScrollBarPolicy();
     deckwindow->setStyleSheet("background-color:transparent");
     deckwindow->setGeometry(0, this->height()*240/1080, this->width(), this->height()*(900-240)/1080);
 
@@ -26,7 +28,43 @@ EditDeckInterface::EditDeckInterface(MainWindow *mw_, QWidget *parent) : QWidget
     btnnew = new QPushButton("New Deck", this);
     connect(btnnew, &QPushButton::clicked, this, &EditDeckInterface::Toeditdecks);
 
-    edt = nullptr;
+    cardwindow_all = new QScrollArea(this);
+    cardwindow_all->setVisible(false);
+    cardwindow_all->setStyleSheet("background-color:transparent");
+    cardwindow_all->setGeometry(0, this->height()*24/108, this->width()*145/192, this->height()*33/108);
+
+    scid_all = new ShowCardsInDeck(Deck::get_ALL(), this);
+    scid_all->setVisible(false);
+    scid_all->Resize(cardwindow_all->width(), cardwindow_all->height());
+    connect(scid_all, SIGNAL(send_click(Card*)), this, SLOT(addonecard(Card*)));
+    connect(scid_all, SIGNAL(send_hover(Card*)), this, SLOT(showcard(Card*)));
+    cardwindow_all->setWidget(scid_all);
+
+    cardwindow_deck = new QScrollArea(this);
+    cardwindow_deck->setVisible(false);
+    cardwindow_deck->setStyleSheet("background-color:transparent");
+    cardwindow_deck->setGeometry(0, this->height()*57/108, this->width()*145/192, this->height()*33/108);
+
+    scid_deck = new ShowCardsInDeck(this);
+    scid_deck->setVisible(false);
+    scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+    connect(scid_deck, SIGNAL(send_click(Card*)), this, SLOT(removeonecard(Card*)));
+    connect(scid_deck, SIGNAL(send_hover(Card*)), this, SLOT(showcard(Card*)));
+    cardwindow_deck->setWidget(scid_deck);
+
+    btnsave = new QPushButton("Save&Exit", this);
+    btnsave->setVisible(false);
+    connect(btnsave, &QPushButton::clicked, this, &EditDeckInterface::Save_Exit);
+
+    btnexit = new QPushButton("Exit", this);
+    btnexit->setVisible(false);
+    connect(btnexit, &QPushButton::clicked, this, &EditDeckInterface::Exit);
+
+    edt = new QTextEdit(this);
+    edt->setStyleSheet("background-color:transparent;border: none;");
+    edt->setTextColor(Qt::white);
+    edt->setReadOnly(true);
+    edt->setVisible(false);
 }
 
 void EditDeckInterface::Backtohome(){
@@ -34,29 +72,75 @@ void EditDeckInterface::Backtohome(){
 }
 
 void EditDeckInterface::Toeditdecks(){
+    choose = 0;
+    chooseleader = new QDialog();
+    chooseleader->setFixedSize(220*2, 142*2);
+    QPushButton *btn1 = new QPushButton(chooseleader);
+    btn1->setStyleSheet("border-image: url(:/images/cards/images/da2gang1.png)");
+    btn1->setGeometry(0, 0, 100*2, 142*2);
+
+    connect(btn1, SIGNAL(clicked(bool)), this, SLOT(dochoice1()));
+    QPushButton *btn2 = new QPushButton(chooseleader);
+    btn2->setStyleSheet("border-image: url(:/images/cards/images/an4ying3zhang3zhe3.png)");
+    connect(btn2, SIGNAL(clicked(bool)), this, SLOT(dochoice2()));
+    btn2->setGeometry(120*2, 0, 100*2, 142*2);
+
+    chooseleader->exec();
+
+    if (choose != 1 && choose != 2)
+        return;
+
+    Deck* tmp;
+    int t = mw->get_player()->get_nextdeckname();
+    QString str = "Deck #" + QString::number(t);
+    if (choose == 1){
+        //qDebug() << 1;
+        tmp = new Deck(str, new Card(183));
+    } else
+    if (choose == 2){
+        //qDebug() << 2;
+        tmp = new Deck(str, new Card(166));
+    }
+
+    state = 1;
+    deckwindow->setVisible(false);
+    scad->setVisible(false);
+    btnback->setVisible(false);
+    btnnew->setVisible(false);
+
+    cardwindow_all->setVisible(true);
+    scid_all->setVisible(true);
+    cardwindow_deck->setVisible(true);
+    btnsave->setVisible(true);
+    btnexit->setVisible(true);
+
+    scid_deck->changeDeck(tmp);
+    scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+    scid_deck->setVisible(true);
 }
 
+void EditDeckInterface::dochoice1(){ choose = 1; chooseleader->close(); }
+void EditDeckInterface::dochoice2(){ choose = 2; chooseleader->close(); }
+
 void EditDeckInterface::resizeEvent(QResizeEvent *){
-    if (state == 0){
+    //if (state == 0){
         deckwindow->setGeometry(0, this->height()*240/1080, this->width(), this->height()*(900-240)/1080);
         scad->Resize(deckwindow->width(), deckwindow->height());
         btnback->setGeometry(this->width()*70/192, this->height()*100/108, this->width()*20/192, this->height()*5/108);
         btnnew->setGeometry(this->width()*102/192, this->height()*100/108, this->width()*20/192, this->height()*5/108);
-    } else
-    {
+    //} else
+    //{
         cardwindow_all->setGeometry(0, this->height()*24/108, this->width()*145/192, this->height()*33/108);
-        scad->Resize(cardwindow_all->width(), cardwindow_all->height());
+        scid_all->Resize(cardwindow_all->width(), cardwindow_all->height());
 
         cardwindow_deck->setGeometry(0, this->height()*57/108, this->width()*145/192, this->height()*33/108);
-        scad->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+        scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
 
         btnsave->setGeometry(this->width()*70/192, this->height()*100/108, this->width()*20/192, this->height()*5/108);
         btnexit->setGeometry(this->width()*102/192, this->height()*100/108, this->width()*20/192, this->height()*5/108);
 
-        if (edt != nullptr){
-            edt->setGeometry(this->width()*150/192, this->width()*24/180, this->width()*47/192, this->height()*66/108);
-        }
-    }
+        edt->setGeometry(this->width()*150/192, this->width()*24/180, this->width()*47/192, this->height()*66/108);
+    //}
 }
 
 void EditDeckInterface::paintEvent(QPaintEvent *){
@@ -90,67 +174,113 @@ void EditDeckInterface::mouseResleaseEvent(QMouseEvent *){
 }
 
 void EditDeckInterface::ToCardState(int id){
-    state = 1; //cardwindow
-    delete btnback;
-    delete btnnew;
-    delete scad;
-    delete deckwindow;
-    deckwindow = nullptr;
-    scad = nullptr;
-    btnback = nullptr;
-    btnnew = nullptr;
+    //qDebug() << id;
+    state = 1;
 
-    cardwindow_all = new QScrollArea(this);
-    scid_all = new ShowCardsInDeck(Deck::get_ALL(), this);
-    scid_all->Resize(deckwindow->width(), deckwindow->height());
-    connect(scid_all, SIGNAL(send_click(Card*)), this, SLOT(addonecard(Card*)));
-    connect(scid_all, SIGNAL(send_hover(Card*)), this, SLOT(showcard(Card*)));
+    deckwindow->setVisible(false);
+    scad->setVisible(false);
+    btnback->setVisible(false);
+    btnnew->setVisible(false);
+
+    cardwindow_all->setVisible(true);
+    scid_all->setVisible(true);
+    cardwindow_deck->setVisible(true);
+    btnsave->setVisible(true);
+    btnexit->setVisible(true);
 
     Deck* tmp = decklist->at(id);
-    scid_deck = new ShowCardsInDeck(tmp, this);
-    scid_deck->Resize(deckwindow->width(), deckwindow->height());
-    connect(scid_deck, SIGNAL(send_click(Card*)), this, SLOT(removeonecard(Card*)));
-    connect(scid_deck, SIGNAL(send_hover(Card*)), this, SLOT(showcard(Card*)));
-
-    btnsave = new QPushButton("Save&Exit", this);
-    connect(btnsave, &QPushButton::clicked, this, &EditDeckInterface::Save_Exit);
-
-    btnexit = new QPushButton("Exit", this);
-    connect(btnexit, &QPushButton::clicked, this, &EditDeckInterface::Exit);
+    scid_deck->changeDeck(tmp);
+    //qDebug() << tmp->get_cards_pointer()->size();
+    scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+    scid_deck->setVisible(true);
 }
 
 void EditDeckInterface::unshowcard(){
-    delete edt;
-    edt = nullptr;
+    //delete edt;
+    //edt = nullptr;
+    edt->setVisible(false);
 }
 
 void EditDeckInterface::showcard(Card* card_){
-    edt = new QTextEdit;
-    edt->setStyleSheet("background-color:transparent");
-    edt->setTextColor(Qt::white);
-    QString str = card_->get_name();
+    edt->setVisible(true);
+    QString str = card_->get_name() + "\n";
     str += "Base: " + QString::number(card_->get_baseblood()) + "\n";
     str += "Boost: " + QString::number(card_->get_boostblood()) + "\n";
     str += "Armor: " + QString::number(card_->get_armor()) + "\n";
     str += card_->get_rule() + "\n";
     str += card_->get_type() + "\n";
     edt->setText(str);
-    edt->setReadOnly(true);
-    //edt->wordWrapMode()
 }
 
 void EditDeckInterface::addonecard(Card* card_){
     scid_deck->addonecard(card_);
+    scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+    //scid_deck->setVisible(true);
 }
 
 void EditDeckInterface::removeonecard(Card* card_){
     scid_deck->removecard(card_);
+    scid_deck->Resize(cardwindow_deck->width(), cardwindow_deck->height());
+    //scid_deck->setVisible(true);
 }
 
 void EditDeckInterface::Save_Exit(){
+    QList<Card*> *tmp = scid_deck->get_cardlist();
+    int sz = tmp->size();
+    if (sz < 25){
+        QMessageBox::critical(mw, QObject::tr("Error"), QObject::tr("Please make sure that your cards in this deck is not less than 25!"));
+        return;
+    }
+    if (sz > 40){
+        QMessageBox::critical(mw, QObject::tr("Error"), QObject::tr("Please make sure that your cards in this deck is not more than 40!"));
+        return;
+    }
+    int goldcnt = 0, silvercnt = 0;
+    for (int i = 0; i < sz; ++i){
+        Card* t = tmp->at(i);
+        QString col = t->get_color();
+        if (col.compare("gold") == 0)
+            ++goldcnt;
+        if (col.compare("silver") == 0)
+            ++silvercnt;
+    }
+    if (goldcnt > 4){
+        QMessageBox::critical(mw, QObject::tr("Error"), QObject::tr("Please make sure that your gold cards in this deck is not more than 4!"));
+        return;
+    }
+    if (silvercnt > 6){
+        QMessageBox::critical(mw, QObject::tr("Error"), QObject::tr("Please make sure that your silver cards in this deck is not more than 6!"));
+        return;
+    }
 
+    //bool flag =
+    mw->get_player()->update_deck(scid_deck->get_name(), scid_deck->get_leader(), scid_deck->get_cardlist());
+    decklist = mw->get_player()->get_decks_pointer();
+    scad->update_deckslist(decklist);
+    scad->Resize(deckwindow->width(), deckwindow->height());
+    Exit();
 }
 
 void EditDeckInterface::Exit(){
+    cardwindow_all->setVisible(false);
+    //qDebug() << "cardwindow_all";
+    scid_all->setVisible(false);
+    //qDebug() << "scid_all";
+    cardwindow_deck->setVisible(false);
+    //qDebug() << "cardwindow_deck";
+    scid_deck->setVisible(false);
+    //qDebug() << "scid_deck";
+    btnsave->setVisible(false);
+    //qDebug() << "btnsave";
+    btnexit->setVisible(false);
+    //qDebug() << "btnexit";
 
+    deckwindow->setVisible(true);
+    //qDebug() << "deckwindow";
+    scad->setVisible(true);
+    //qDebug() << "scad";
+    btnback->setVisible(true);
+    //qDebug() << "btnback";
+    btnnew->setVisible(true);
+    //qDebug() << "btnnew";
 }

@@ -34,7 +34,7 @@ Card::Card(int id, QObject *parent) : QObject(parent)
             }
         }
     }
-
+/*
     switch (id) {
     case 16:    //刺骨冰霜
         name = "刺骨冰霜";
@@ -94,6 +94,7 @@ Card::Card(int id, QObject *parent) : QObject(parent)
     default:
         break;
     }
+*/
 }
 
 Card::Card(const Card &c){

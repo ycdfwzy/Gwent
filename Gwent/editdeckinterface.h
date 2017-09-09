@@ -13,6 +13,8 @@
 #include "cards/cardlabelchoosdeck.h"
 #include "cards/showcardsindeck.h"
 #include <QMouseEvent>
+#include <QMessageBox>
+#include <QDialog>
 
 class MainWindow;
 
@@ -36,6 +38,8 @@ public slots:
     void showcard(Card* card_);
     void addonecard(Card* card_);
     void removeonecard(Card* card_);
+    void dochoice1();
+    void dochoice2();
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -51,7 +55,8 @@ private:
     ShowCardsInDeck *scid_all, *scid_deck;
     QPushButton *btnback, *btnnew, *btnsave, *btnexit;
     QTextEdit *edt;
-    int state;
+    int state, choose;
+    QDialog *chooseleader;
     //static QString background[2];
 };
 

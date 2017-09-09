@@ -22,6 +22,7 @@ Deck::Deck(const QString &name_, QJsonValue &info, QObject *parent) : QObject(pa
 
 Deck::Deck(const QString &name_, QString info, QObject *parent) : QObject(parent){
     name = name_;
+    leader = nullptr;
     QStringList sl = info.split(',');
     int sz = sl.size();
     for (int i = 0; i < sz; ++i){
@@ -30,10 +31,31 @@ Deck::Deck(const QString &name_, QString info, QObject *parent) : QObject(parent
     }
 }
 
+Deck::Deck(const QString &name_, Card* leader_, QList<Card*> *cardlist, QObject *parent) : QObject(parent){
+    name = name_;
+    leader = new Card(leader_->get_id());
+    change_cardlist(cardlist);
+}
+
 Deck* Deck::get_ALL(){
     if (ALL == nullptr)
         ALL = new Deck("ALL", "16,8,18,41,19,17,10,7,101,57,58,66,75,169,188,181,182,256,225,236,281,294,63,167,171");
     return ALL;
+}
+
+void Deck::change_cardlist(QList<Card*> *cardlist){
+    int sz = cards.size();
+    for (int i = 0; i < sz; ++i)
+        delete cards.at(i);
+    cards.clear();
+
+    if (cardlist != nullptr){
+        sz = cardlist->size();
+        for (int i = 0; i < sz; ++i){
+            Card *tmp = new Card(cardlist->at(i)->get_id());
+            cards.append(tmp);
+        }
+    }
 }
 
 QString Deck::get_name()const{return name;}

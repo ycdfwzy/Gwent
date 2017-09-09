@@ -31,12 +31,40 @@ Player::Player(gameClient *client_, const QString &Alldata, QObject *parent) : Q
             }
         }
     }
+
+    name_helper = 0;
     //qDebug() << "init player!";
     //qDebug() << name << totalgames << victorygames << drawgames << defeatgames;
 }
 
 Player::~Player(){}
 
+bool Player::update_deck(QString name, Card* leader, QList<Card*> *cardlist){
+    //send to server
+    QString str = name + " " + QString::number(leader->get_id());
+    foreach (Card* x, *cardlist){
+        str += " " + QString::number(x->get_id());
+    }
+    str = "AddDeck: " + str;
+    client->Send_Date(str);
+
+    qDebug() << str;
+
+    bool flag = false;
+    int sz = decks.size();
+    for (int i = 0; i < sz; ++i)
+    if (name.compare(decks.at(i)->get_name()) == 0){
+        flag = true;
+        decks.at(i)->change_cardlist(cardlist);
+        break;
+    }
+    if (!flag){
+        Deck *tmp = new Deck(name, leader, cardlist);
+        decks.append(tmp);
+        name_helper++;
+    }
+    return flag;
+}
 
 QString Player::get_name()const{return name;}
 int Player::get_totalgames()const{return totalgames;}
@@ -45,3 +73,4 @@ int Player::get_drawgames()const{return drawgames;}
 int Player::get_defeatgames()const{return defeatgames;}
 QList<Deck*>& Player::get_decks(){return decks;}
 QList<Deck*>* Player::get_decks_pointer(){return &decks;}
+int Player::get_nextdeckname(){return name_helper+1;}

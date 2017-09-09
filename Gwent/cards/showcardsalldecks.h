@@ -14,8 +14,9 @@ class ShowCardsAllDecks : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ShowCardsAllDecks(QList<Deck*> *cardslist, QWidget *parent = nullptr);
+    explicit ShowCardsAllDecks(QList<Deck*> *deckslist, QWidget *parent = nullptr);
 
+    void update_deckslist(QList<Deck*> *deckslist);
     void Resize(int w, int h);
     void mouseMoveEvent(QMouseEvent *);
     void mousePressEvent(QMouseEvent *);
