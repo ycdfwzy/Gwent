@@ -76,12 +76,12 @@ void EditDeckInterface::Toeditdecks(){
     chooseleader = new QDialog();
     chooseleader->setFixedSize(220*2, 142*2);
     QPushButton *btn1 = new QPushButton(chooseleader);
-    btn1->setStyleSheet("border-image: url(:/images/cards/images/da2gang1.png)");
+    btn1->setStyleSheet("border-image: url(:/cards/cards/images/da2gang1.png)");
     btn1->setGeometry(0, 0, 100*2, 142*2);
 
     connect(btn1, SIGNAL(clicked(bool)), this, SLOT(dochoice1()));
     QPushButton *btn2 = new QPushButton(chooseleader);
-    btn2->setStyleSheet("border-image: url(:/images/cards/images/an4ying3zhang3zhe3.png)");
+    btn2->setStyleSheet("border-image: url(:/cards/cards/images/an4ying3zhang3zhe3.png)");
     connect(btn2, SIGNAL(clicked(bool)), this, SLOT(dochoice2()));
     btn2->setGeometry(120*2, 0, 100*2, 142*2);
 
@@ -92,7 +92,7 @@ void EditDeckInterface::Toeditdecks(){
 
     Deck* tmp;
     int t = mw->get_player()->get_nextdeckname();
-    QString str = "Deck #" + QString::number(t);
+    QString str = "Deck#" + QString::number(t);
     if (choose == 1){
         //qDebug() << 1;
         tmp = new Deck(str, new Card(183));

@@ -63,4 +63,6 @@ FORMS += \
 DISTFILES +=
 
 RESOURCES += \
-    res.qrc
+    res.qrc \
+    cardimages2.qrc \
+    cardimages.qrc
