@@ -10,6 +10,7 @@ gameClient::gameClient(MainWindow *mw_){
     client->connectToHost("192.168.13.1", 8888);
     if(!client->waitForConnected(30000)){
         QMessageBox::critical(mw, QObject::tr("Connection Error"), QObject::tr("Server not found!"));
+        delete client;
         return;
     }
     //client->write();

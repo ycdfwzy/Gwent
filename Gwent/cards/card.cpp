@@ -27,8 +27,11 @@ Card::Card(int id, QObject *parent) : QObject(parent)
                         type = tmp.take("type").toVariant().toString();
                         color = tmp.take("color").toVariant().toString();
                         faction = tmp.take("faction").toVariant().toString();
-                        baseblood = tmp.take("boold").toVariant().toInt();
-                        //qDebug() << name;
+                        baseblood = tmp.take("blood").toVariant().toInt();
+                        if (baseblood > 0){
+                            location = tmp.take("location").toVariant().toString();
+                        }
+                        //qDebug() << name << " " << baseblood;
                     }
                 }
             }
@@ -120,3 +123,4 @@ int Card::get_id() const{return id;}
 int Card::get_baseblood() const{return baseblood;}
 int Card::get_boostblood() const{return boostblood;}
 int Card::get_armor() const{return armor;}
+QString Card::get_location() const{return location;}

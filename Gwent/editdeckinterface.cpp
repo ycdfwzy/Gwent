@@ -22,10 +22,12 @@ EditDeckInterface::EditDeckInterface(MainWindow *mw_, QWidget *parent) : QWidget
     connect(scad, SIGNAL(haschosen(int)), this, SLOT(ToCardState(int)));
     deckwindow->setWidget(scad);
 
-    btnback = new QPushButton("Back", this);
+    btnback = new QPushButton(this);
+    btnback->setStyleSheet("border-image: url(:/images/btnexit)");
     connect(btnback, &QPushButton::clicked, this, &EditDeckInterface::Backtohome);
 
-    btnnew = new QPushButton("New Deck", this);
+    btnnew = new QPushButton(this);
+    btnnew->setStyleSheet("border-image: url(:/images/btnnew)");
     connect(btnnew, &QPushButton::clicked, this, &EditDeckInterface::Toeditdecks);
 
     cardwindow_all = new QScrollArea(this);
@@ -52,12 +54,14 @@ EditDeckInterface::EditDeckInterface(MainWindow *mw_, QWidget *parent) : QWidget
     connect(scid_deck, SIGNAL(send_hover(Card*)), this, SLOT(showcard(Card*)));
     cardwindow_deck->setWidget(scid_deck);
 
-    btnsave = new QPushButton("Save&Exit", this);
+    btnsave = new QPushButton(this);
     btnsave->setVisible(false);
+    btnsave->setStyleSheet("border-image: url(:/images/btnsave)");
     connect(btnsave, &QPushButton::clicked, this, &EditDeckInterface::Save_Exit);
 
-    btnexit = new QPushButton("Exit", this);
+    btnexit = new QPushButton(this);
     btnexit->setVisible(false);
+    btnexit->setStyleSheet("border-image: url(:/images/btnexit)");
     connect(btnexit, &QPushButton::clicked, this, &EditDeckInterface::Exit);
 
     edt = new QTextEdit(this);
@@ -204,9 +208,11 @@ void EditDeckInterface::unshowcard(){
 void EditDeckInterface::showcard(Card* card_){
     edt->setVisible(true);
     QString str = card_->get_name() + "\n";
-    str += "Base: " + QString::number(card_->get_baseblood()) + "\n";
-    str += "Boost: " + QString::number(card_->get_boostblood()) + "\n";
-    str += "Armor: " + QString::number(card_->get_armor()) + "\n";
+    if (card_->get_baseblood() > 0){
+        str += "Blood: " + QString::number(card_->get_baseblood()) + "\n";
+    }
+    //str += "Boost: " + QString::number(card_->get_boostblood()) + "\n";
+    //str += "Armor: " + QString::number(card_->get_armor()) + "\n";
     str += card_->get_rule() + "\n";
     str += card_->get_type() + "\n";
     edt->setText(str);

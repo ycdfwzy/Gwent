@@ -23,6 +23,7 @@ public:
     QString get_color() const;
     QString get_rule() const;
     QString get_type() const;
+    QString get_location() const;
     int get_id() const;
     int get_baseblood() const;
     int get_boostblood() const;
@@ -36,6 +37,8 @@ private:
     QString name, faction;
     QString picpath, color;
     QString rule, type;
+    QString location;
+    QString curlocation;
     int id, baseblood, boostblood, armor;
 };
 

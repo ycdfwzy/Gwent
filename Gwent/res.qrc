@@ -25,6 +25,17 @@
         <file alias="home_background">images/home.png</file>
         <file alias="btnmatch">images/match.png</file>
         <file alias="matchhover">images/match2.png</file>
+        <file alias="btnexit">images/exit.png</file>
+        <file alias="btnnew">images/newdeck.png</file>
+        <file alias="btnsave">images/saveexit.png</file>
+        <file alias="agile_disloyal">images/agile_disloyal.png</file>
+        <file alias="agile_loyal">images/agile_loyal.png</file>
+        <file alias="melee_disloyal">images/melee_disloyal.png</file>
+        <file alias="melee_loyal">images/melee_loyal.png</file>
+        <file alias="ranged_disloyal">images/ranged_disloyal.png</file>
+        <file alias="ranged_loyal">images/ranged_loyal.png</file>
+        <file alias="siege_disloyal">images/siege_disloyal.png</file>
+        <file alias="siege_loyal">images/siege_loyal.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>

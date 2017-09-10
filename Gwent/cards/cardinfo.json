@@ -15,8 +15,9 @@
         "name_us": "Geralt: Igni",
         "picpath": ":/cards/cards/images/jie2luo4te4yi1ge2ni2fa3yin4.png",
         "rule": "部署：若对方同排总战力不低于20，则摧毁其上所有最强的单位。",
-        "blood": 0,
+        "blood": 4,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：猎魔人。站位：任意/忠诚。"
     },
     "16": {
@@ -37,6 +38,7 @@
         "rule": "部署：吞噬3个友军单位，吸收它们的战力为自身的基础战力。",
         "blood": 5,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：吸血鬼"
     },
     "167": {
@@ -47,6 +49,7 @@
         "rule": "部署：吞噬右侧单位。每 2 回合，己方回合开始时，吞噬右侧单位。",
         "blood": 6,
         "color": "brown",
+        "location": "agile_loyal",
         "type": "属性：龙兽。站位：任意/忠诚。"
     },
     "169": {
@@ -57,6 +60,7 @@
         "rule": "部署：生成3只“暴怒的狼”，并在对方同排降下“蔽日浓雾”。",
         "blood": 5,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：残物。站位：任意/忠诚"
     },
     "17": {
@@ -77,7 +81,8 @@
         "rule": "每当有友军单位吞噬1张牌，便生成1只“蟹蜘蛛”，随后受到1点伤害（无视护甲）。部署：获得 2 点护甲。",
         "blood": 6,
         "color": "brown",
-        "type": "属性：类虫生物"
+        "location": "siege_loyal",
+        "type": "属性：类虫生物。站位：攻城/忠诚"
     },
     "18": {
         "faction": "中立",
@@ -87,7 +92,7 @@
         "rule": "在对方单排降下“蔽日浓雾”。",
         "blood": 0,
         "color": "brown",
-        "type": "属性：特殊，天气。站位：攻城/忠诚。"
+        "type": "属性：特殊，天气。"
     },
     "181": {
         "faction": "怪物",
@@ -97,6 +102,7 @@
         "rule": "部署：从牌组打出“煮婆”和“呢喃婆”。",
         "blood": 6,
         "color": "silver",
+        "location": "siege_loyal",
         "type": "属性：法师。站位：攻城/忠诚。"
     },
     "182": {
@@ -107,6 +113,7 @@
         "rule": "部署：从牌组打出“煮婆”和“织婆”。",
         "blood": 6,
         "color": "silver",
+        "location": "siege_loyal",
         "type": "属性：法师。站位：攻城/忠诚。"
     },
     "183": {
@@ -117,6 +124,7 @@
         "rule": "生成“达冈”。",
         "blood": 6,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：水生。"
     },
     "188": {
@@ -127,6 +135,7 @@
         "rule": "部署：获得护盾。遗愿：在该排末位生成 2 个“次级土元素”。",
         "blood": 6,
         "color": "brown",
+        "location": "melee_loyal",
         "type": "属性：构造体。站位：近战/忠诚。"
     },
     "19": {
@@ -147,6 +156,7 @@
         "rule": "部署：移除所在排的天气效果。",
         "blood": 8,
         "color": "brown",
+        "location": "agile_loyal",
         "type": "属性：野兽。站位：任意/忠诚。"
     },
     "236": {
@@ -157,6 +167,7 @@
         "rule": "对方战场上的“刺骨冰霜”伤害提升至3点。",
         "blood": 5,
         "color": "silver",
+        "location": "agile_loyal",
         "type": "属性：狂猎。站位：任意/忠诚。"
     },
     "256": {
@@ -167,6 +178,7 @@
         "rule": "部署：从牌组打出“呢喃婆”和“织婆”。",
         "blood": 8,
         "color": "silver",
+        "location": "siege_loyal",
         "type": "属性：法师。站位：攻城/忠诚。"
     },
     "281": {
@@ -177,6 +189,7 @@
         "rule": "部署：将3个敌军单位移至对方同排，并在此排降下“刺骨冰霜”。",
         "blood": 8,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：狂猎，法师。站位：任意/忠诚"
     },
     "294": {
@@ -187,6 +200,7 @@
         "rule": "部署：从牌组顶端抽1张牌。将所在战场其他排的1个单位移至自身的同一排。",
         "blood": 12,
         "color": "silver",
+        "location": "agile_disloyal",
         "type": "属性：构造体，佚亡。站位：任意/不忠诚"
     },
     "41": {
@@ -207,6 +221,7 @@
         "rule": "每当己方“蔽日浓雾”在敌排生效，便从牌组打出，或复活至己方同排。若场上不再存在“蔽日浓雾”效果，则摧毁所有“小雾妖”。",
         "blood": 4,
         "color": "brown",
+        "location": "agile_loyal",
         "type": "属性：食腐生物。站位：任意/忠诚"
     },
     "58": {
@@ -217,6 +232,7 @@
         "rule": "部署：从牌组顶端各抽1张金色牌和银色牌。打出1张，将另1张置于牌组顶端。",
         "blood": 1,
         "color": "gold",
+        "location": "agile_loyal",
         "type": "属性：狂猎。站位：任意/忠诚"
     },
     "63": {
@@ -227,6 +243,7 @@
         "rule": "部署：从牌组打出所有“蟹蜘蛛”。",
         "blood": 3,
         "color": "brown",
+        "location": "ranged_loyal",
         "type": "属性：类虫生物。站位：远程/忠诚"
     },
     "66": {
@@ -237,6 +254,7 @@
         "rule": "部署：在自身左侧生成2个“鹰身女妖蛋”。",
         "blood": 5,
         "color": "brown",
+        "location": "agile_loyal",
         "type": "属性：野兽。站位：任意/忠诚"
     },
     "7": {
@@ -257,6 +275,7 @@
         "rule": "部署：触发相邻单位的遗愿能力。",
         "blood": 3,
         "color": "silver",
+        "location": "agile_loyal",
         "type": "属性：野兽。站位：任意/忠诚。"
     },
     "8": {
