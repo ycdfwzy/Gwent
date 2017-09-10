@@ -5,20 +5,23 @@
 
 gameClient::gameClient(MainWindow *mw_){
     mw = mw_;
-    client = new MyTCPSocket();
-    //qDebug() << client->socketDescriptor();
+    client = nullptr;
+    tryconnect();
+}
+
+gameClient::~gameClient(){}
+
+void gameClient::tryconnect(){
+    if (client == nullptr) client = new MyTCPSocket();
     client->connectToHost("192.168.13.1", 8888);
     if(!client->waitForConnected(30000)){
         QMessageBox::critical(mw, QObject::tr("Connection Error"), QObject::tr("Server not found!"));
         delete client;
+        client = nullptr;
         return;
     }
-    //client->write();
-    //qDebug() << client->socketDescriptor();
     QObject::connect(client, &MyTCPSocket::readyReadClient, this, &gameClient::Read_Data);
 }
-
-gameClient::~gameClient(){}
 
 void gameClient::Read_Data(){
     QByteArray buffer = client->readAll();

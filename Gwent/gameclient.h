@@ -15,6 +15,7 @@ public:
     gameClient(MainWindow *mw_);
     ~gameClient();
 
+    void tryconnect();
     void Read_Data();
     void Send_Date(QString);
     MyTCPSocket *client;

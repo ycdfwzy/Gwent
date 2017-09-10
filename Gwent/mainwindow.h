@@ -7,8 +7,10 @@
 #include "welcomeinterface.h"
 #include "gameclient.h"
 #include "homeinterface.h"
-#include "waitinterface.h"
+#include "waitbattleinterface.h"
 #include "editdeckinterface.h"
+#include "chooseforbattleinterface.h"
+#include "battleinterface.h"
 #include "player.h"
 /*
 namespace Ui {
@@ -23,7 +25,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     gameClient *mGameClient;
-    enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck, EditCertainDeck};
+    enum GameState { Welcome, Home, Waiting, Playing, GameOver, EditDeck, Choose};
 
     void init_player(const QString &str);
     Player* get_player()const;

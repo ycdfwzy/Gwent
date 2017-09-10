@@ -35,9 +35,10 @@ void MainWindow::switchstate(MainWindow::GameState state){
             mCurrentStateWidget = new HomeInterface(this);
             break;
         case Waiting:
-            mCurrentStateWidget = new WaitInterface(this);
+            mCurrentStateWidget = new WaitBattleInterface(this);
             break;
         case Playing:
+            mCurrentStateWidget = new BattleInterface(this);
             break;
         case GameOver:
             break;
@@ -45,10 +46,10 @@ void MainWindow::switchstate(MainWindow::GameState state){
             mCurrentStateWidget = new EditDeckInterface(this);
             this->setMouseTracking(true);
             break;
-        /*case EditCertainDeck:
-            mCurrentStateWidget = new EditCertainDeckInterface(this);
+        case Choose:
+            mCurrentStateWidget = new ChooseforBattleInterface(this);
             this->setMouseTracking(true);
-            break;*/
+            break;
         default:
             break;
         }

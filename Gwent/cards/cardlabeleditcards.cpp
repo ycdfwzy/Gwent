@@ -19,7 +19,6 @@ CardLabelEditCards::CardLabelEditCards(Card *card_, QWidget *parent):card(card_)
     this->setMouseTracking(true);
 }
 
-
 void CardLabelEditCards::mouseMoveEvent(QMouseEvent *){
     //qDebug() << "hover";
     emit behovered(card);

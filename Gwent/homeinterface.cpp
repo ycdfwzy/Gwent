@@ -71,7 +71,7 @@ void HomeInterface::resizeEvent(QResizeEvent *){
 }
 
 void HomeInterface::btnplayClicked(){
-    mw->switchstate(MainWindow::Waiting);
+    mw->switchstate(MainWindow::Choose);
 }
 
 void HomeInterface::btneditClicked(){

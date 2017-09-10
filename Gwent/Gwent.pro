@@ -31,7 +31,6 @@ SOURCES += \
     gameclient.cpp \
     mytcpsocket.cpp \
     homeinterface.cpp \
-    waitinterface.cpp \
     player.cpp \
     editdeckinterface.cpp \
     cards/card.cpp \
@@ -39,7 +38,10 @@ SOURCES += \
     cards/cardlabelchoosedeck.cpp \
     cards/showcardsalldecks.cpp \
     cards/showcardsindeck.cpp \
-    cards/cardlabeleditcards.cpp
+    cards/cardlabeleditcards.cpp \
+    waitbattleinterface.cpp \
+    chooseforbattleinterface.cpp \
+    battleinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +49,6 @@ HEADERS += \
     gameclient.h \
     mytcpsocket.h \
     homeinterface.h \
-    waitinterface.h \
     player.h \
     editdeckinterface.h \
     cards/card.h \
@@ -55,7 +56,10 @@ HEADERS += \
     cards/cardlabelchoosdeck.h \
     cards/showcardsalldecks.h \
     cards/showcardsindeck.h \
-    cards/cardlabeleditcards.h
+    cards/cardlabeleditcards.h \
+    waitbattleinterface.h \
+    chooseforbattleinterface.h \
+    battleinterface.h
 
 FORMS += \
         mainwindow.ui

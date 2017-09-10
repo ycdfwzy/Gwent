@@ -69,7 +69,8 @@ void WelcomeInterface::createDialog(){
 void WelcomeInterface::tryconnect(){
     if (mw->mGameClient == nullptr)
         mw->mGameClient = new gameClient(mw);
-    if (mw->mGameClient->client->socketDescriptor() == -1){
+    else mw->mGameClient->tryconnect();
+    if (mw->mGameClient->client == nullptr || mw->mGameClient->client->socketDescriptor() == -1){
         //mw->
         return;
     }
