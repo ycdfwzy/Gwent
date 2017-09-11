@@ -41,7 +41,11 @@ SOURCES += \
     cards/cardlabeleditcards.cpp \
     waitbattleinterface.cpp \
     chooseforbattleinterface.cpp \
-    battleinterface.cpp
+    battleinterface.cpp \
+    scorelabel.cpp \
+    cards/showbattlecard.cpp \
+    cards/cardlabelinbattle.cpp \
+    cards/placeholder.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -59,7 +63,11 @@ HEADERS += \
     cards/cardlabeleditcards.h \
     waitbattleinterface.h \
     chooseforbattleinterface.h \
-    battleinterface.h
+    battleinterface.h \
+    scorelabel.h \
+    cards/showbattlecard.h \
+    cards/cardlabelinbattle.h \
+    cards/placeholder.h
 
 FORMS += \
         mainwindow.ui

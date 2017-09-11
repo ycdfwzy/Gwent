@@ -31,7 +31,7 @@ Card::Card(int id, QObject *parent) : QObject(parent)
                         if (baseblood > 0){
                             location = tmp.take("location").toVariant().toString();
                         }
-                        //qDebug() << name << " " << baseblood;
+                        qDebug() << name << " " << baseblood;
                     }
                 }
             }
