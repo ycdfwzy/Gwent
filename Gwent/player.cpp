@@ -33,6 +33,7 @@ Player::Player(gameClient *client_, const QString &Alldata, QObject *parent) : Q
     }
 
     name_helper = 0;
+    battle = nullptr;
     //qDebug() << "init player!";
     //qDebug() << name << totalgames << victorygames << drawgames << defeatgames;
 }
@@ -74,3 +75,5 @@ int Player::get_defeatgames()const{return defeatgames;}
 QList<Deck*>& Player::get_decks(){return decks;}
 QList<Deck*>* Player::get_decks_pointer(){return &decks;}
 int Player::get_nextdeckname(){return name_helper+1;}
+BattleInterface* Player::get_battle(){return battle;}
+void Player::set_battle(BattleInterface *b){ battle = b;}

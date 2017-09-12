@@ -5,6 +5,7 @@
 #include <QString>
 #include <QtNetwork/QTcpSocket>
 #include "mytcpsocket.h"
+#include "waitbattleinterface.h"
 
 class MainWindow;
 
@@ -17,12 +18,17 @@ public:
 
     void tryconnect();
     void Read_Data();
+    void dealwithmsg(QString);
     void Send_Date(QString);
+    void set_wbi(WaitBattleInterface*);
     MyTCPSocket *client;
 
-private:
+signals:
+    void foundsignal();
 
+private:
     MainWindow *mw;
+    WaitBattleInterface *wbi;
 };
 
 #endif // GAMECLIENT_H

@@ -11,8 +11,10 @@
 #include <QList>
 #include "cards/deck.h"
 #include "cards/card.h"
+#include "battleinterface.h"
 
 class gameClient;
+
 
 class Player : public QObject
 {
@@ -32,7 +34,8 @@ public:
     bool update_deck(QString name, Card* leader, QList<Card*> *cardlist);
     QList<Deck*>& get_decks();
     QList<Deck*>* get_decks_pointer();
-
+    BattleInterface* get_battle();
+    void set_battle(BattleInterface*);
 
 signals:
 
@@ -42,6 +45,7 @@ private:
     int totalgames, victorygames, drawgames, defeatgames;
     QList<Deck*> decks;
     int name_helper;
+    BattleInterface *battle;
 };
 
 #endif // PLAYER_H

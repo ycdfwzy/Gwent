@@ -20,9 +20,11 @@ WaitBattleInterface::WaitBattleInterface(MainWindow *mw_, QWidget *parent) : QWi
     connect(timer, SIGNAL(timeout()), this, SLOT(restartanimation()));
     timer->start(1000);
 
-    QTimer *t =  new QTimer(this);
+    //connect(mw->mGameClient, SIGNAL(foundsignal()), this, SLOT(hasfound()));
+    mw->mGameClient->set_wbi(this);
+    /*QTimer *t =  new QTimer(this);
     connect(t, SIGNAL(timeout()), this, SLOT(hasfound()));
-    t->start(10000);
+    t->start(10000);*/
 }
 
 WaitBattleInterface::~WaitBattleInterface(){}
@@ -52,9 +54,10 @@ void WaitBattleInterface::hasfound(){
 
     disconnect(timer, SIGNAL(timeout()), this, SLOT(restartanimation()));
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(startbattle()));
-    timer->setSingleShot(true);
-    timer->start(1000);
+    startbattle();
+    //connect(timer, SIGNAL(timeout()), this, SLOT(startbattle()));
+    //timer->setSingleShot(true);
+    //timer->start(1000);
 }
 
 void WaitBattleInterface::startbattle(){
@@ -64,6 +67,8 @@ void WaitBattleInterface::startbattle(){
 
 void WaitBattleInterface::stopbtnClicked(){
     //send msg to server
+    QString msg = "STOPMATCH!";
+    mw->mGameClient->Send_Date(msg);
     mw->switchstate(MainWindow::Home);
 }
 

@@ -5,6 +5,7 @@
 #include <QList>
 #include <QStringList>
 #include <QMouseEvent>
+#include <QPushButton>
 #include "cards/card.h"
 #include "cards/deck.h"
 #include "cards/cardlabelinbattle.h"
@@ -16,6 +17,7 @@ class ShowBattleCard : public QWidget
 public:
     explicit ShowBattleCard(QList<Card*> *cardlist, QWidget *parent = nullptr);
     explicit ShowBattleCard(QString info, QWidget *parent = nullptr);
+    explicit ShowBattleCard(QWidget *parent = nullptr);
 
     void addonecard(Card* card, int pos);
     void addonecard(int id, int pos);
@@ -26,6 +28,10 @@ public:
     void Resize(int, int);
     void mouseMoveEvent(QMouseEvent*);
     void mousePressEvent(QMouseEvent*);
+    void loadcards(QString);
+    int get_score();
+
+    QList<Card*>* get_cardlist();
 
 signals:
     void send_press_card(int);

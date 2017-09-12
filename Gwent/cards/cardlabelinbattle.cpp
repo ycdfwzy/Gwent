@@ -71,3 +71,5 @@ void CardLabelinBattle::mouseMoveEvent(QMouseEvent *){
 void CardLabelinBattle::mousePressEvent(QMouseEvent *){
     emit send_press(index);
 }
+
+void CardLabelinBattle::set_index(int index_){index = index_;}

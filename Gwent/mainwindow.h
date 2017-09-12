@@ -29,6 +29,7 @@ public:
 
     void init_player(const QString &str);
     Player* get_player()const;
+    void setoverbackground(int h);
 
 public slots:
     void switchstate(MainWindow:: GameState state);
@@ -37,6 +38,7 @@ private:
     GameState mGameState;
     QWidget *mCurrentStateWidget;
     Player *mplayer;
+    QString overbackground;
 
 };
 

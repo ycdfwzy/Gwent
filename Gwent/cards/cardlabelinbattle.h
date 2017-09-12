@@ -18,6 +18,7 @@ public:
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *);
     void mousePressEvent(QMouseEvent *);
+    void set_index(int);
 
 signals:
     void send_hover(int index);

@@ -30,31 +30,40 @@ void MainWindow::switchstate(MainWindow::GameState state){
         switch (state) {
         case Welcome:
             mCurrentStateWidget = new WelcomeInterface(this);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Home:
             mCurrentStateWidget = new HomeInterface(this);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Waiting:
             mCurrentStateWidget = new WaitBattleInterface(this);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Playing:
             mCurrentStateWidget = new BattleInterface(this);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         case GameOver:
             break;
         case EditDeck:
             mCurrentStateWidget = new EditDeckInterface(this);
             this->setMouseTracking(true);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         case Choose:
             mCurrentStateWidget = new ChooseforBattleInterface(this);
             this->setMouseTracking(true);
+            this->setCentralWidget(mCurrentStateWidget);
             break;
         default:
             break;
         }
-        this->setCentralWidget(mCurrentStateWidget);
+
     }
 }
 
 Player* MainWindow::get_player()const{return mplayer;}
+void MainWindow::setoverbackground(int h){
+
+}
