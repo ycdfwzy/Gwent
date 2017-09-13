@@ -30,6 +30,8 @@ Card::Card(int id, QObject *parent) : QObject(parent)
                         baseblood = tmp.take("blood").toVariant().toInt();
                         if (baseblood > 0){
                             location = tmp.take("location").toVariant().toString();
+
+                            ARMOR = false;
                         }
                         qDebug() << name << " " << baseblood;
                     }
@@ -124,3 +126,30 @@ int Card::get_baseblood() const{return baseblood;}
 int Card::get_boostblood() const{return boostblood;}
 int Card::get_armor() const{return armor;}
 QString Card::get_location() const{return location;}
+bool Card::get_ARMOR(){return ARMOR;}
+void Card::set_ARMOR(bool f){ARMOR = f;}
+void Card::add_armor(int dlt){
+    if (dlt < 0 && ARMOR){
+        set_ARMOR(false);
+        return;
+    }
+    if (armor + dlt < 0){
+        armor = 0;
+        dlt += armor;
+        add_boost(dlt);
+        return;
+    }
+    armor += dlt;
+}
+void Card::add_boost(int dlt){
+    if (boostblood + dlt < 0){
+        dlt += boostblood;
+        boostblood = 0;
+        add_base(dlt);
+        return;
+    }
+    boostblood += dlt;
+}
+void Card::add_base(int dlt){
+    baseblood += dlt;
+}

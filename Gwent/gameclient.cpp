@@ -129,29 +129,7 @@ void gameClient::dealwithmsg(QString str){
     if (str.startsWith("move ")){//卡牌移动
         QString str0 = str.mid(5);
         mw->get_player()->get_battle()->move(str0);
-        /*
-        if (str.startsWith("move_m ")){
-            QString str0 = str.mid(7);
-            mw->get_player()->get_battle()->move_m(str0);
-        } else
-        {
-            QString str0 = str.mid(7);
-            mw->get_player()->get_battle()->move_o(str0);
-        }
-        */
     } else
-        /*
-    if (str.startsWith("replace")){//调度
-
-        if (str.startsWith("replace_m")){
-            QString str0 = str.mid(9);
-            mw->get_player()->get_battle()->replace_m(str0);
-        } else
-        {
-            QString str0 = str.mid(9);
-            mw->get_player()->get_battle()->replace_o(str0);
-        }
-    } else*/
     if (str.startsWith("YOUGETDRAW!")){//平局
         mw->get_player()->get_battle()->gameover(2);
     } else
@@ -160,6 +138,10 @@ void gameClient::dealwithmsg(QString str){
     } else
     if (str.startsWith("YOUAERLOSER!")){//失败
         mw->get_player()->get_battle()->gameover(1);
+    } else
+    if (str.startsWith("bloodchange ")){
+        QString str0 = str.mid(12);
+        mw->get_player()->get_battle()->bloodchange(str0);
     }
     }
 }

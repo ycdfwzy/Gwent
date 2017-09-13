@@ -28,6 +28,11 @@ public:
     int get_baseblood() const;
     int get_boostblood() const;
     int get_armor() const;
+    void add_base(int);
+    void add_boost(int);
+    void add_armor(int);
+    void set_ARMOR(bool);
+    bool get_ARMOR();
 
 signals:
 
@@ -40,6 +45,7 @@ private:
     QString location;
     QString curlocation;
     int id, baseblood, boostblood, armor;
+    bool ARMOR;
 };
 
 #endif // CARD_H

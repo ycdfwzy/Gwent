@@ -39,6 +39,7 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
         qsa[i] = new QScrollArea(this);
         qsa[i]->setStyleSheet("background-color:transparent");
         if (i >= 8) qsa[i]->setVisible(false);
+        sky[i] = clean;
     }
 
     edt = new QTextEdit(this);
@@ -633,4 +634,21 @@ void BattleInterface::send_surrender(){
 
 void BattleInterface::send_pass(){
     mw->mGameClient->Send_Date("pass");
+}
+
+void BattleInterface::bloodchange(QString info){
+    QStringList lt = info.split(' ');
+    int x = lt.at(0).toInt();
+    int y = lt.at(1).toInt();
+    int dlt1 = lt.at(2).toInt();
+    int dlt2 = lt.at(3).toInt();
+    int dlt3 = lt.at(4).toInt();
+    qDebug() << "bloodchange" << dlt1 << dlt2 << dlt3;
+    shows[x]->get_cardlist()->at(y)->add_armor(dlt3);
+    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    shows[x]->get_cardlist()->at(y)->add_boost(dlt2);
+    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    shows[x]->get_cardlist()->at(y)->add_base(dlt1);
+    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    this->update();
 }

@@ -35,22 +35,7 @@ public:
     void roundendtips(int);
     void turntip(int);
     void move(QString);
-    //void replace(QString);
-    /*
-    void loaddeck_m(QString);//加载牌组
-    void loaddeck_o(QString);
-    void pump_m(int);//抽卡
-    void pump_o(int);
-    void Mulligantips(int);//提示调度
-    void roundstarttips(int);//提示一轮开始
-    void roundendtips(int);//提示一轮结束
-    void turntip(int);//提示回合
-    void move_m(QString);//移动
-    void move_o(QString);
-    void replace_m(QString);//调度
-    void replace_o(QString);
-    */
-
+    void bloodchange(QString);
     //void move(ShowBattleCard* src, int srcid, ShowBattleCard* tar, int tarid = -1);
     void move(int, int, int, int j2 = -1);
     void updatescore();
@@ -59,38 +44,11 @@ public:
 
     void showcardinfo(Card*);
     void unshowcardinfo();
+    enum SKY{clean=0, fog=1, frost=2, rain=3};
 
 signals:
 
 public slots:
-    /*
-    void receive_press_card_m_card(int);
-    void receive_press_card_m_melee(int);
-    void receive_press_card_m_ranged(int);
-    void receive_press_card_m_siege(int);
-    void receive_press_card_o_card(int);
-    void receive_press_card_o_melee(int);
-    void receive_press_card_o_ranged(int);
-    void receive_press_card_o_siege(int);
-
-    void receive_hover_card_m_card(int);
-    void receive_hover_card_m_melee(int);
-    void receive_hover_card_m_ranged(int);
-    void receive_hover_card_m_siege(int);
-    void receive_hover_card_o_card(int);
-    void receive_hover_card_o_melee(int);
-    void receive_hover_card_o_ranged(int);
-    void receive_hover_card_o_siege(int);
-
-    void receive_press_blank_m_card(int);
-    void receive_press_blank_m_melee(int);
-    void receive_press_blank_m_ranged(int);
-    void receive_press_blank_m_siege(int);
-    void receive_press_blank_o_card(int);
-    void receive_press_blank_o_melee(int);
-    void receive_press_blank_o_ranged(int);
-    void receive_press_blank_o_siege(int);
-    */
     void receive_press_blank(int, int);
     void receive_press_card(int, int);
     void receive_hover_card(int, int);
@@ -112,6 +70,7 @@ private:
     QLabel *turnlabel;
     QPushButton *btnpass, *btnsurrender;
     int score[2];
+    SKY sky[12];
     // cards lists
 };
 
