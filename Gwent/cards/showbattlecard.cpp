@@ -66,14 +66,18 @@ void ShowBattleCard::loadcards(QString info){
 void ShowBattleCard::Resize(int w, int h){
     while (!blanks.empty()){
         PlaceHolder *blank = blanks.front();
+        blank->setVisible(false);
         disconnect(blank, SIGNAL(send_pressed(int)), this, SLOT(receive_press_blank(int)));
         delete blank;
         blanks.pop_front();
     }
 
     int sz = showlist.size();
-    //this->resize(sz*h*500/71/9, h);
-    this->resize(w, h);
+    int maxwidth;
+    if (w > (sz+1)*h*500/71/9)
+        maxwidth = w;
+    else maxwidth = (sz+1)*h*500/71/9;
+    this->resize(maxwidth, h);
     for (int i = 0 ; i < sz; ++i){
         CardLabelinBattle *tmp = showlist.at(i);
         tmp->set_index(i);
@@ -92,7 +96,7 @@ void ShowBattleCard::Resize(int w, int h){
         int t = sz*(h*500/71/9)-h*50/71/18;
         if ( t < 0) t = 0;
         //blank->setGeometry(w, 0, h*50/71/9, h);
-        blank->setGeometry(t, 0, w, h);
+        blank->setGeometry(t, 0, maxwidth-t, h);
         connect(blank, SIGNAL(send_pressed(int)), this, SLOT(receive_press_blank(int)));
         blanks.push_back(blank);
     //}
@@ -130,7 +134,7 @@ void ShowBattleCard::deleteonecard(int pos){
     CardLabelinBattle *tmp = showlist.at(pos);
     disconnect(tmp, SIGNAL(send_press(int)), this, SLOT(receive_press_card(int)));
     disconnect(tmp, SIGNAL(send_hover(int)), this, SLOT(receive_hover_card(int)));
-    //delete tmp;
+    delete tmp;
     showlist.removeAt(pos);
 }
 

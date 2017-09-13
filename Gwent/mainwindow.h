@@ -12,6 +12,7 @@
 #include "chooseforbattleinterface.h"
 #include "battleinterface.h"
 #include "player.h"
+#include "gameoverinterface.h"
 /*
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ public:
     void init_player(const QString &str);
     Player* get_player()const;
     void setoverbackground(int h);
+    QString get_overbackground();
 
 public slots:
     void switchstate(MainWindow:: GameState state);
@@ -39,7 +41,7 @@ private:
     QWidget *mCurrentStateWidget;
     Player *mplayer;
     QString overbackground;
-
+    QString picpath;
 };
 
 #endif // MAINWINDOW_H

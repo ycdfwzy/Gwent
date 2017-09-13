@@ -114,6 +114,14 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
 void BattleInterface::paintEvent(QPaintEvent *){
     QPainter painter(this);
     painter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/images/battleboard"));
+
+    painter.setPen(Qt::white);
+    painter.drawText(this->width()*45/192, this->height()*6/108, QString::number(o_cardshow->get_cardlist()->size()));
+    painter.drawText(this->width()*45/192, this->height()*102/108, QString::number(m_cardshow->get_cardlist()->size()));
+    painter.drawText(this->width()*152/192, this->height()*6/108, QString::number(o_graveyardshow->get_cardlist()->size()));
+    painter.drawText(this->width()*152/192, this->height()*102/108, QString::number(m_graveyardshow->get_cardlist()->size()));
+    painter.drawText(this->width()*186/192, this->height()*6/108, QString::number(o_deckshow->get_cardlist()->size()));
+    painter.drawText(this->width()*186/192, this->height()*102/108, QString::number(m_deckshow->get_cardlist()->size()));
 }
 
 void BattleInterface::resizeEvent(QResizeEvent *){
@@ -127,16 +135,6 @@ void BattleInterface::resizeEvent(QResizeEvent *){
     o_siege->setGeometry(this->width()*70/192, this->height()*18/108, this->width()*51/192, this->height()*11/108);
     edt->setGeometry(this->width()*159/192, this->height()*22/108, this->width()*21/192, this->height()*32/108);
 
-    m_meleescorelabel->setGeometry(this->width()*415/1920, this->height()*570/1080, this->width()*8/192, this->height()*8/108);
-    m_rangedscorelabel->setGeometry(this->width()*415/1920, this->height()*690/1080, this->width()*8/192, this->height()*8/108);
-    m_siegescorelabel->setGeometry(this->width()*415/1920, this->height()*805/1080, this->width()*8/192, this->height()*8/108);
-    m_totalscorelabel->setGeometry(this->width()*270/1920, this->height()*700/1080, this->width()*8/192, this->height()*8/108);
-
-    o_meleescorelabel->setGeometry(this->width()*415/1920, this->height()*430/1080, this->width()*8/192, this->height()*8/108);
-    o_rangedscorelabel->setGeometry(this->width()*415/1920, this->height()*310/1080, this->width()*8/192, this->height()*8/108);
-    o_siegescorelabel->setGeometry(this->width()*415/1920, this->height()*195/1080, this->width()*8/192, this->height()*8/108);
-    o_totalscorelabel->setGeometry(this->width()*270/1920, this->height()*315/1080, this->width()*8/192, this->height()*8/108);
-
     m_cardshow->Resize(m_card->width(), m_card->height());
     m_meleeshow->Resize(m_melee->width(), m_melee->height());
     m_rangedshow->Resize(m_ranged->width(), m_ranged->height());
@@ -149,7 +147,21 @@ void BattleInterface::resizeEvent(QResizeEvent *){
 
     turnlabel->setGeometry(this->width()*10/192, this->height()*60/108, this->width()*20/192, this->height()*7/108);
     btnpass->setGeometry(this->width()*12/192, this->height()*43/108, this->width()*16/192, this->height()*6/108);
-    btnsurrender->setGeometry(this->width()*12/192, this->height()*55/108, this->width()*16/192, this->height()*6/108);
+    btnsurrender->setGeometry(this->width()*12/192, this->height()*53/108, this->width()*16/192, this->height()*6/108);
+
+    layout_score();
+}
+
+void BattleInterface::layout_score(){
+    m_meleescorelabel->setGeometry(this->width()*415/1920, this->height()*570/1080, this->width()*8/192, this->height()*8/108);
+    m_rangedscorelabel->setGeometry(this->width()*415/1920, this->height()*690/1080, this->width()*8/192, this->height()*8/108);
+    m_siegescorelabel->setGeometry(this->width()*415/1920, this->height()*805/1080, this->width()*8/192, this->height()*8/108);
+    m_totalscorelabel->setGeometry(this->width()*270/1920, this->height()*700/1080, this->width()*8/192, this->height()*8/108);
+
+    o_meleescorelabel->setGeometry(this->width()*415/1920, this->height()*430/1080, this->width()*8/192, this->height()*8/108);
+    o_rangedscorelabel->setGeometry(this->width()*415/1920, this->height()*310/1080, this->width()*8/192, this->height()*8/108);
+    o_siegescorelabel->setGeometry(this->width()*415/1920, this->height()*195/1080, this->width()*8/192, this->height()*8/108);
+    o_totalscorelabel->setGeometry(this->width()*270/1920, this->height()*315/1080, this->width()*8/192, this->height()*8/108);
 }
 
 void BattleInterface::mouseMoveEvent(QMouseEvent *){
@@ -218,7 +230,7 @@ void BattleInterface::roundendtips(int h){
     if (h == 0) msg = "You win this round!";
     else if (h == 1) msg = "You lose this round!";
     else msg = "Draw this round!";
-    QMessageBox tip(QMessageBox::NoIcon, "tips", msg);
+    QMessageBox tip(QMessageBox::NoIcon, "Tips", msg);
     QTimer *t = new QTimer(this);
     connect(t, SIGNAL(timeout()), &tip, SLOT(close()));
     t->setSingleShot(true);
@@ -233,6 +245,7 @@ void BattleInterface::turntip(int h){
 }
 
 ShowBattleCard * BattleInterface::convert(QString str, int type){
+    qDebug() << "convert";
     ShowBattleCard *src;
     if (type == 0){
         if (str.compare("mdeck") == 0) src = m_deckshow;
@@ -276,7 +289,7 @@ void BattleInterface::move_m(QString info){
     tar = convert(str);
     str = infolist.at(1);
     srcid = str.toInt();
-    if (info.size() == 3){
+    if (infolist.size() == 3){
         move(src, srcid, tar);
     } else
     {
@@ -297,7 +310,7 @@ void BattleInterface::move_o(QString info){
     tar = convert(str, 1);
     str = infolist.at(1);
     srcid = str.toInt();
-    if (info.size() == 3){
+    if (infolist.size() == 3){
         move(src, srcid, tar);
     } else
     {
@@ -351,6 +364,8 @@ void BattleInterface::move(ShowBattleCard *src, int srcid, ShowBattleCard *tar, 
 
     src->Resize(src->width(), src->height());
     tar->Resize(tar->width(), tar->height());
+    updatescore();
+    this->update();
 }
 
 void BattleInterface::gameover(int h){
@@ -386,6 +401,8 @@ void BattleInterface::updatescore(){
     o_rangedscorelabel->set_score(o_rangedshow->get_score());
     o_siegescorelabel->set_score(o_siegeshow->get_score());
     o_totalscorelabel->set_score(o_meleescorelabel->get_score() + o_rangedscorelabel->get_score() + o_siegescorelabel->get_score());
+
+    layout_score();
 }
 
 //前方高能

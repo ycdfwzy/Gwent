@@ -45,7 +45,8 @@ SOURCES += \
     scorelabel.cpp \
     cards/showbattlecard.cpp \
     cards/cardlabelinbattle.cpp \
-    cards/placeholder.cpp
+    cards/placeholder.cpp \
+    gameoverinterface.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -67,7 +68,8 @@ HEADERS += \
     scorelabel.h \
     cards/showbattlecard.h \
     cards/cardlabelinbattle.h \
-    cards/placeholder.h
+    cards/placeholder.h \
+    gameoverinterface.h
 
 FORMS += \
         mainwindow.ui

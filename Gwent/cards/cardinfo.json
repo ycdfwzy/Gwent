@@ -121,7 +121,7 @@
         "name_cn": "达冈",
         "name_us": "Dagon",
         "picpath": ":/cards/cards/images/da2gang1.png",
-        "rule": "生成“达冈”。",
+        "rule": "部署：生成“刺骨冰霜”、“蔽日浓雾”或“倾盆大雨”",
         "blood": 6,
         "color": "gold",
         "location": "agile_loyal",
@@ -284,7 +284,7 @@
         "name_us": "Biting Frost",
         "picpath": ":/cards/cards/images/ci4gu3bing1shuang1.png",
         "rule": "在对方单排降下“刺骨冰霜”。",
-        "blood": 3,
+        "blood": 0,
         "color": "brown",
         "type": "属性：特殊，天气。站位：任意"
     }

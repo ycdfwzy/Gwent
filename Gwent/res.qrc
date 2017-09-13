@@ -45,6 +45,9 @@
         <file alias="oturn">images/oturn.png</file>
         <file alias="pass">images/pass.png</file>
         <file alias="surrender">images/surrender.png</file>
+        <file alias="drawbackground">images/drawbackground.png</file>
+        <file alias="losebackground">images/losebackground.png</file>
+        <file alias="winbackground">images/winbackground.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>

@@ -26,6 +26,8 @@ public:
     void mousePressEvent(QMouseEvent*);
     void resizeEvent(QResizeEvent*);
 
+    void layout_score();
+
     void loaddeck_m(QString);//加载牌组
     void loaddeck_o(QString);
     void pump_m(int);//抽卡

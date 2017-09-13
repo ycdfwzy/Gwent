@@ -28,12 +28,14 @@ void gameClient::Read_Data(){
     QByteArray buffer = client->readAll();
     QString str = buffer;
 
+    qDebug() << str;
+
     QStringList strlist = str.split(';');
     int sz = strlist.size();
     for (int i = 0; i < sz-1; ++i){
         dealwithmsg(QString(strlist.at(i)));
     }
-    //qDebug() << str;
+
 }
 
 void gameClient::set_wbi(WaitBattleInterface* wbi_){
@@ -129,13 +131,13 @@ void gameClient::dealwithmsg(QString str){
             mw->get_player()->get_battle()->replace_o(str0);
         }
     } else
-    if (str.startsWith("DRAW!")){//平局
+    if (str.startsWith("YOUGETDRAW!")){//平局
         mw->get_player()->get_battle()->gameover(2);
     } else
-    if (str.startsWith("WIN!")){//胜利
+    if (str.startsWith("YOUAREWINNER!")){//胜利
         mw->get_player()->get_battle()->gameover(0);
     } else
-    if (str.startsWith("LOSE!")){//失败
+    if (str.startsWith("YOUAERLOSER!")){//失败
         mw->get_player()->get_battle()->gameover(1);
     }
     }
@@ -145,6 +147,5 @@ void gameClient::Send_Date(QString msg){
     msg = msg + ";";
     client->write(msg.toLatin1());
     //client->flush();
-    //client->waitForBytesWritten(-1);
     client->waitForBytesWritten();
 }
