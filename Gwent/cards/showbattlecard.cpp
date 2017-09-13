@@ -109,7 +109,7 @@ void ShowBattleCard::mouseMoveEvent(QMouseEvent *){
 
 void ShowBattleCard::mousePressEvent(QMouseEvent *){
     qDebug() << "ShowBattleCard::mousePressEvent";
-    emit send_press_blank(showlist.size());
+    emit send_press_blank(__index, showlist.size());
 }
 
 void ShowBattleCard::addonecard(Card *card, int pos){
@@ -153,7 +153,8 @@ int ShowBattleCard::get_score(){
     return score;
 }
 
-void ShowBattleCard::receive_hover_card(int index){ emit send_hover_card(index);}
-void ShowBattleCard::receive_press_blank(int index){ emit send_press_blank(index);}
-void ShowBattleCard::receive_press_card(int index){ emit send_press_card(index);}
+void ShowBattleCard::setid(int x){__index = x;}
+void ShowBattleCard::receive_hover_card(int index){ emit send_hover_card(__index, index);}
+void ShowBattleCard::receive_press_blank(int index){ emit send_press_blank(__index, index);}
+void ShowBattleCard::receive_press_card(int index){ emit send_press_card(__index, index);}
 QList<Card*>* ShowBattleCard::get_cardlist(){return cardlist;}

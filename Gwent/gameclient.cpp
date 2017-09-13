@@ -67,7 +67,13 @@ void gameClient::dealwithmsg(QString str){
         wbi->hasfound();
     } else
     if (mw->get_player()->get_battle() != nullptr){
-    if (str.startsWith("LoadDeck")){
+    if (str.startsWith("LoadDeck: ")){
+        QString str0 = str.mid(10);
+        if (str0.startsWith('0'))
+            mw->get_player()->get_battle()->loaddeck(0, str0.mid(2));
+        else
+            mw->get_player()->get_battle()->loaddeck(1, str0.mid(2));
+        /*
         if (str.startsWith("LoadDeck_m: ")){
             QString str0 = str.mid(12);
             mw->get_player()->get_battle()->loaddeck_m(str0);
@@ -76,8 +82,16 @@ void gameClient::dealwithmsg(QString str){
             QString str0 = str.mid(12);
             mw->get_player()->get_battle()->loaddeck_o(str0);
         }
+        */
     } else
-    if (str.startsWith("PUMP")){
+    if (str.startsWith("PUMP: ")){
+        QString str0 = str.mid(6);
+        int t;
+        if (str0.startsWith('0')) t = 0;
+        else t = 1;
+        str0 = str0.mid(2);
+        mw->get_player()->get_battle()->pump(t, str0.toInt());
+        /*
         if (str.startsWith("PUMP_m: ")){
             QString str0 = str.mid(8);
             mw->get_player()->get_battle()->pump_m(str0.toInt());
@@ -86,6 +100,7 @@ void gameClient::dealwithmsg(QString str){
             QString str0 = str.mid(8);
             mw->get_player()->get_battle()->pump_o(str0.toInt());
         }
+        */
     } else
     if (str.startsWith("Mulligan")){//提示调度
         QString str0 = str.mid(8);
@@ -111,7 +126,10 @@ void gameClient::dealwithmsg(QString str){
     if (str.startsWith("drawthisround")){//提示平局
         mw->get_player()->get_battle()->roundendtips(2);
     } else
-    if (str.startsWith("move")){//卡牌移动
+    if (str.startsWith("move ")){//卡牌移动
+        QString str0 = str.mid(5);
+        mw->get_player()->get_battle()->move(str0);
+        /*
         if (str.startsWith("move_m ")){
             QString str0 = str.mid(7);
             mw->get_player()->get_battle()->move_m(str0);
@@ -120,8 +138,11 @@ void gameClient::dealwithmsg(QString str){
             QString str0 = str.mid(7);
             mw->get_player()->get_battle()->move_o(str0);
         }
+        */
     } else
+        /*
     if (str.startsWith("replace")){//调度
+
         if (str.startsWith("replace_m")){
             QString str0 = str.mid(9);
             mw->get_player()->get_battle()->replace_m(str0);
@@ -130,7 +151,7 @@ void gameClient::dealwithmsg(QString str){
             QString str0 = str.mid(9);
             mw->get_player()->get_battle()->replace_o(str0);
         }
-    } else
+    } else*/
     if (str.startsWith("YOUGETDRAW!")){//平局
         mw->get_player()->get_battle()->gameover(2);
     } else

@@ -30,13 +30,14 @@ public:
     void mousePressEvent(QMouseEvent*);
     void loadcards(QString);
     int get_score();
+    void setid(int);
 
     QList<Card*>* get_cardlist();
 
 signals:
-    void send_press_card(int);
-    void send_hover_card(int);
-    void send_press_blank(int);
+    void send_press_card(int, int);
+    void send_hover_card(int, int);
+    void send_press_blank(int, int);
 
 public slots:
     void receive_press_card(int);
@@ -47,6 +48,7 @@ private:
     QList<Card*> *cardlist;
     QList<CardLabelinBattle*> showlist;
     QList<PlaceHolder*> blanks;
+    int __index;
 };
 
 #endif // SHOWBATTLECARD_H
