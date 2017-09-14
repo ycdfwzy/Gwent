@@ -51,6 +51,10 @@
         <file alias="fog">images/fog.png</file>
         <file alias="frost">images/Frost.png</file>
         <file alias="rain">images/Rain.png</file>
+        <file alias="endmulligan">images/endmulligan.png</file>
+        <file alias="score0">images/score0.png</file>
+        <file alias="score1">images/score1.png</file>
+        <file alias="score2">images/score2.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>

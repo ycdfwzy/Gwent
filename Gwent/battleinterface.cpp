@@ -48,6 +48,11 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
     btnsurrender->setStyleSheet("border-image:url(:/images/surrender)");
     connect(btnsurrender, SIGNAL(clicked(bool)), this, SLOT(send_surrender()));
 
+    btnendmulligan = new QPushButton(this);
+    btnendmulligan->setStyleSheet("border-image:url(:/images/endmulligan)");
+    btnendmulligan->setVisible(false);
+    connect(btnendmulligan, SIGNAL(clicked(bool)), this, SLOT(send_endmulligan()));
+
     score[0] = score[1] = 0;
 }
 
@@ -62,6 +67,9 @@ void BattleInterface::paintEvent(QPaintEvent *){
     painter.drawText(this->width()*152/192, this->height()*102/108, QString::number(shows[8]->get_cardlist()->size()));
     painter.drawText(this->width()*186/192, this->height()*6/108, QString::number(shows[11]->get_cardlist()->size()));
     painter.drawText(this->width()*186/192, this->height()*102/108, QString::number(shows[10]->get_cardlist()->size()));
+
+    painter.drawPixmap(this->width()*13/192, this->height()*31/108, this->width()*95/1920, this->height()*8/108, QPixmap(":/images/score"+QString::number(score[1])));
+    painter.drawPixmap(this->width()*13/192, this->height()*69/108, this->width()*95/1920, this->height()*8/108, QPixmap(":/images/score"+QString::number(score[0])));
 
     QString pic[12];
     for (int i = 2; i < 8; ++i){
@@ -113,6 +121,7 @@ void BattleInterface::resizeEvent(QResizeEvent *){
     turnlabel->setGeometry(this->width()*10/192, this->height()*60/108, this->width()*20/192, this->height()*7/108);
     btnpass->setGeometry(this->width()*12/192, this->height()*43/108, this->width()*16/192, this->height()*6/108);
     btnsurrender->setGeometry(this->width()*12/192, this->height()*53/108, this->width()*16/192, this->height()*6/108);
+    btnendmulligan->setGeometry(this->width()*12/192, this->height()*83/108, this->width()*16/192, this->height()*6/108);
 
     layout_score();
 }
@@ -150,21 +159,6 @@ void BattleInterface::loaddeck(int x, QString msg){
     shows[10^x]->loadcards(msg);
     qDebug() << shows[10^x]->get_cardlist()->size();
 }
-/*
-void BattleInterface::loaddeck_m(QString msg){
-    qDebug() << "loaddeck_m";
-    //QStringList cardlist = msg.split(" ");
-    m_deckshow->loadcards(msg);
-    qDebug() << m_deckshow->get_cardlist()->size();
-}
-
-void BattleInterface::loaddeck_o(QString msg){
-    qDebug() << "loaddeck_o";
-    //QStringList cardlist = msg.split(" ");
-    o_deckshow->loadcards(msg);
-    qDebug() << o_deckshow->get_cardlist()->size();
-}
-*/
 
 void BattleInterface::pump(int x, int num){
     qDebug() << "pump " << x << num;
@@ -173,20 +167,8 @@ void BattleInterface::pump(int x, int num){
     }
 }
 
-/*
-void BattleInterface::pump_m(int num){
-    qDebug() << "pump_m " << num;
-    for (int i = 0; i < num; ++i){
-        move(m_deckshow, 0, m_cardshow);
-    }
-}
-
-void BattleInterface::pump_o(int num){
-    for (int i = 0; i < num; ++i)
-        move(o_deckshow, 0, o_cardshow);
-}
-*/
 void BattleInterface::Mulligantips(int num){
+    btnendmulligan->setVisible(true);
     QMessageBox tip(QMessageBox::NoIcon, "tips", "You can mulligan " + QString::number(num) + " cards!");
     QTimer *t = new QTimer(this);
     connect(t, SIGNAL(timeout()), &tip, SLOT(close()));
@@ -196,6 +178,7 @@ void BattleInterface::Mulligantips(int num){
 }
 
 void BattleInterface::roundstarttips(int r){
+    btnendmulligan->setVisible(false);
     qDebug() << "roundstarttips";
     QMessageBox tip(QMessageBox::NoIcon, "tips", "Round "+QString::number(r)+"!");
     QTimer *t = new QTimer(this);
@@ -240,42 +223,6 @@ void BattleInterface::turntip(int h){
     updatescore();
 }
 
-/*
-ShowBattleCard * BattleInterface::convert(QString str, int type){
-    qDebug() << "convert";
-    ShowBattleCard *src;
-    if (type == 0){
-        if (str.compare("mdeck") == 0) src = m_deckshow;
-        if (str.compare("mgraveyard") == 0) src = m_graveyardshow;
-        if (str.compare("mcard") == 0) src = m_cardshow;
-        if (str.compare("mmelee") == 0) src = m_meleeshow;
-        if (str.compare("mranged") == 0) src = m_rangedshow;
-        if (str.compare("msiege") == 0) src = m_siegeshow;
-        if (str.compare("odeck") == 0) src = o_deckshow;
-        if (str.compare("ograveyard") == 0) src = o_graveyardshow;
-        if (str.compare("ocard") == 0) src = o_cardshow;
-        if (str.compare("omelee") == 0) src = o_meleeshow;
-        if (str.compare("oranged") == 0) src = o_rangedshow;
-        if (str.compare("osiege") == 0) src = o_siegeshow;
-    } else
-    {
-        if (str.compare("mdeck") == 0) src = o_deckshow;
-        if (str.compare("mgraveyard") == 0) src = o_graveyardshow;
-        if (str.compare("mcard") == 0) src = o_cardshow;
-        if (str.compare("mmelee") == 0) src = o_meleeshow;
-        if (str.compare("mranged") == 0) src = o_rangedshow;
-        if (str.compare("msiege") == 0) src = o_siegeshow;
-        if (str.compare("odeck") == 0) src = m_deckshow;
-        if (str.compare("ograveyard") == 0) src = m_graveyardshow;
-        if (str.compare("ocard") == 0) src = m_cardshow;
-        if (str.compare("omelee") == 0) src = m_meleeshow;
-        if (str.compare("oranged") == 0) src = m_rangedshow;
-        if (str.compare("osiege") == 0) src = m_siegeshow;
-    }
-    return src;
-}
-*/
-
 void BattleInterface::move(QString info){
     qDebug() << "move" << info;
     QStringList infolist = info.split(' ');
@@ -319,6 +266,8 @@ void BattleInterface::showcardinfo(Card* card_){
         str += "Blood: " + QString::number(card_->get_baseblood()) + "\n";
         str += "Boost: " + QString::number(card_->get_boostblood()) + "\n";
         str += "Armor: " + QString::number(card_->get_armor()) + "\n";
+        if (card_->get_ARMOR())
+            str += "Shield\n";
     }
     str += card_->get_rule() + "\n";
     str += card_->get_type() + "\n";
@@ -393,4 +342,29 @@ void BattleInterface::set_sky(QString info){
     if (y == 2) sky[x] = frost;
     if (y == 3) sky[x] = rain;
     this->update();
+}
+
+void BattleInterface::addnewcard(QString info){
+    QStringList infolist = info.split(' ');
+    Card *card = new Card(infolist.at(0).toInt());
+    int x = infolist.at(1).toInt();
+    int y;
+    if (infolist.size() == 3)
+        y = infolist.at(2).toInt();
+    else y = shows[x]->get_cardlist()->size();
+
+    shows[x]->addonecard(card, y);
+    shows[x]->Resize(qsa[x]->width(), qsa[x]->height());
+
+}
+
+void BattleInterface::get_ARMOR(QString info){
+    QStringList infolist = info.split(' ');
+    int index1 = infolist.at(0).toInt();
+    int index2 = infolist.at(1).toInt();
+    shows[index1]->get_cardlist()->at(index2)->set_ARMOR(true);
+}
+
+void BattleInterface::send_endmulligan(){
+    mw->mGameClient->Send_Date("endmulligan");
 }

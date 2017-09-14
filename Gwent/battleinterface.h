@@ -41,6 +41,8 @@ public:
     void move(int, int, int, int j2 = -1);
     void updatescore();
     void gameover(int);
+    void addnewcard(QString);
+    void get_ARMOR(QString);
     //ShowBattleCard * convert(QString, int type = 0);
 
     void showcardinfo(Card*);
@@ -53,6 +55,7 @@ public slots:
     void receive_press_blank(int, int);
     void receive_press_card(int, int);
     void receive_hover_card(int, int);
+    void send_endmulligan();
     void send_surrender();
     void send_pass();
 
@@ -69,7 +72,7 @@ private:
     //ShowBattleCard *m_deckshow, *m_graveyardshow, *m_cardshow, *m_meleeshow, *m_rangedshow, *m_siegeshow;
     //ShowBattleCard *o_deckshow, *o_graveyardshow, *o_cardshow, *o_meleeshow, *o_rangedshow, *o_siegeshow;
     QLabel *turnlabel;
-    QPushButton *btnpass, *btnsurrender;
+    QPushButton *btnpass, *btnsurrender, *btnendmulligan;
     int score[2];
     SKY sky[12];
     // cards lists

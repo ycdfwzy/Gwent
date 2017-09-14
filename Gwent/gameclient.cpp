@@ -50,20 +50,12 @@ void gameClient::dealwithmsg(QString str){
     } else
     if (str.startsWith("Welcome!")){
         mw->switchstate(MainWindow::Home);
-        /*if (str.startsWith("Welcome!Data:")){
-            str = str.mid(13);
-            mw->init_player(str);
-        }*/
     } else
     if (str.startsWith("Data:")){
         str = str.mid(5);
         mw->init_player(str);
     } else
     if (str.startsWith("FOUND ")){
-        /*emit foundsignal();
-        QEventLoop eventloop;
-        QTimer::singleShot(1000, &eventloop, SLOT(quit()));
-        eventloop.exec();*/
         wbi->hasfound();
     } else
     if (mw->get_player()->get_battle() != nullptr){
@@ -73,16 +65,6 @@ void gameClient::dealwithmsg(QString str){
             mw->get_player()->get_battle()->loaddeck(0, str0.mid(2));
         else
             mw->get_player()->get_battle()->loaddeck(1, str0.mid(2));
-        /*
-        if (str.startsWith("LoadDeck_m: ")){
-            QString str0 = str.mid(12);
-            mw->get_player()->get_battle()->loaddeck_m(str0);
-        } else
-        {
-            QString str0 = str.mid(12);
-            mw->get_player()->get_battle()->loaddeck_o(str0);
-        }
-        */
     } else
     if (str.startsWith("PUMP: ")){
         QString str0 = str.mid(6);
@@ -91,16 +73,6 @@ void gameClient::dealwithmsg(QString str){
         else t = 1;
         str0 = str0.mid(2);
         mw->get_player()->get_battle()->pump(t, str0.toInt());
-        /*
-        if (str.startsWith("PUMP_m: ")){
-            QString str0 = str.mid(8);
-            mw->get_player()->get_battle()->pump_m(str0.toInt());
-        } else
-        {
-            QString str0 = str.mid(8);
-            mw->get_player()->get_battle()->pump_o(str0.toInt());
-        }
-        */
     } else
     if (str.startsWith("Mulligan")){//提示调度
         QString str0 = str.mid(8);
@@ -146,6 +118,14 @@ void gameClient::dealwithmsg(QString str){
     if (str.startsWith("sky ")){
         QString str0 = str.mid(4);
         mw->get_player()->get_battle()->set_sky(str0);
+    } else
+    if (str.startsWith("new ")){
+        QString str0 = str.mid(4);
+        mw->get_player()->get_battle()->addnewcard(str0);
+    } else
+    if (str.startsWith("getARMOR ")){
+        QString str0 = str.mid(9);
+        mw->get_player()->get_battle()->get_ARMOR(str0);
     }
     }
 }
