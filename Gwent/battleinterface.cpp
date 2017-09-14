@@ -10,31 +10,6 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
     turnlabel = new QLabel(this);
     turnlabel->setStyleSheet("background-color:transparent");
 
-    /*
-    m_graveyard = new QScrollArea(this);
-    //m_graveyard->setStyleSheet("background-color:transparent");
-    m_graveyard->setVisible(false);
-    m_card = new QScrollArea(this);
-    m_card->setStyleSheet("background-color:transparent");
-    m_melee = new QScrollArea(this);
-    m_melee->setStyleSheet("background-color:transparent");
-    m_ranged = new QScrollArea(this);
-    m_ranged->setStyleSheet("background-color:transparent");
-    m_siege = new QScrollArea(this);
-    m_siege->setStyleSheet("background-color:transparent");
-
-    o_graveyard = new QScrollArea(this);
-    //o_graveyard->setStyleSheet("background-color:transparent");
-    o_graveyard->setVisible(false);
-    o_card = new QScrollArea(this);
-    o_card->setStyleSheet("background-color:transparent");
-    o_melee = new QScrollArea(this);
-    o_melee->setStyleSheet("background-color:transparent");
-    o_ranged = new QScrollArea(this);
-    o_ranged->setStyleSheet("background-color:transparent");
-    o_siege = new QScrollArea(this);
-    o_siege->setStyleSheet("background-color:transparent");
-    */
     for (int i = 0; i < 12; ++i){
         qsa[i] = new QScrollArea(this);
         qsa[i]->setStyleSheet("background-color:transparent");
@@ -51,17 +26,6 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
     for (int i = 0; i < 8; ++i){
         scoreLabel[i] = new ScoreLabel(0, this);
     }
-    /*
-    m_meleescorelabel = new ScoreLabel(0, this);
-    m_rangedscorelabel = new ScoreLabel(0, this);
-    m_siegescorelabel = new ScoreLabel(0, this);
-    m_totalscorelabel = new ScoreLabel(0, this);
-
-    o_meleescorelabel = new ScoreLabel(0, this);
-    o_rangedscorelabel = new ScoreLabel(0, this);
-    o_siegescorelabel = new ScoreLabel(0, this);
-    o_totalscorelabel = new ScoreLabel(0, this);
-    */
 
     for (int i = 0; i < 12; ++i){
         shows[i] = new ShowBattleCard(this);
@@ -76,59 +40,6 @@ BattleInterface::BattleInterface(MainWindow *mw_, QWidget *parent) : QWidget(par
             shows[i]->setVisible(false);
         }
     }
-    /*
-    m_deckshow = new ShowBattleCard(this);
-    m_deckshow->setVisible(false);
-    m_graveyardshow = new ShowBattleCard(this);
-    m_graveyardshow->setVisible(false);
-    m_cardshow = new ShowBattleCard(this);
-    connect(m_cardshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_m_card(int)));
-    connect(m_cardshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_m_card(int)));
-    connect(m_cardshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_m_card(int)));
-    m_meleeshow = new ShowBattleCard(this);
-    connect(m_meleeshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_m_melee(int)));
-    connect(m_meleeshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_m_melee(int)));
-    connect(m_meleeshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_m_melee(int)));
-    m_rangedshow = new ShowBattleCard(this);
-    connect(m_rangedshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_m_ranged(int)));
-    connect(m_rangedshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_m_ranged(int)));
-    connect(m_rangedshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_m_ranged(int)));
-    m_siegeshow = new ShowBattleCard(this);
-    connect(m_siegeshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_m_siege(int)));
-    connect(m_siegeshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_m_siege(int)));
-    connect(m_siegeshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_m_siege(int)));
-
-    o_deckshow = new ShowBattleCard(this);
-    o_deckshow->setVisible(false);
-    o_graveyardshow = new ShowBattleCard(this);
-    o_graveyardshow->setVisible(false);
-    o_cardshow = new ShowBattleCard(this);
-    connect(o_cardshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_o_card(int)));
-    connect(o_cardshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_o_card(int)));
-    connect(o_cardshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_o_card(int)));
-    o_meleeshow = new ShowBattleCard(this);
-    connect(o_meleeshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_o_melee(int)));
-    connect(o_meleeshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_o_melee(int)));
-    connect(o_meleeshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_o_melee(int)));
-    o_rangedshow = new ShowBattleCard(this);
-    connect(o_rangedshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_o_ranged(int)));
-    connect(o_rangedshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_o_ranged(int)));
-    connect(o_rangedshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_o_ranged(int)));
-    o_siegeshow = new ShowBattleCard(this);
-    connect(o_siegeshow, SIGNAL(send_hover_card(int)), this, SLOT(receive_hover_card_o_siege(int)));
-    connect(o_siegeshow, SIGNAL(send_press_blank(int)), this, SLOT(receive_press_blank_o_siege(int)));
-    connect(o_siegeshow, SIGNAL(send_press_card(int)), this, SLOT(receive_press_card_o_siege(int)));
-
-    m_card->setWidget(m_cardshow);
-    m_melee->setWidget(m_meleeshow);
-    m_ranged->setWidget(m_rangedshow);
-    m_siege->setWidget(m_siegeshow);
-
-    o_card->setWidget(o_cardshow);
-    o_melee->setWidget(o_meleeshow);
-    o_ranged->setWidget(o_rangedshow);
-    o_siege->setWidget(o_siegeshow);
-    */
     btnpass = new QPushButton(this);
     btnpass->setStyleSheet("border-image:url(:/images/pass)");
     connect(btnpass, SIGNAL(clicked(bool)), this, SLOT(send_pass()));
@@ -151,6 +62,37 @@ void BattleInterface::paintEvent(QPaintEvent *){
     painter.drawText(this->width()*152/192, this->height()*102/108, QString::number(shows[8]->get_cardlist()->size()));
     painter.drawText(this->width()*186/192, this->height()*6/108, QString::number(shows[11]->get_cardlist()->size()));
     painter.drawText(this->width()*186/192, this->height()*102/108, QString::number(shows[10]->get_cardlist()->size()));
+
+    QString pic[12];
+    for (int i = 2; i < 8; ++i){
+        if (sky[i] == clean) continue;
+        switch (sky[i]) {
+        case fog:
+            pic[i] = ":/images/fog";
+            break;
+        case frost:
+            pic[i] = ":/images/frost";
+            break;
+        case rain:
+            pic[i] = ":/images/rain";
+            break;
+        default:
+            pic[i] = "";
+            break;
+        }
+    }
+    if (pic[2].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*80/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[2]));
+    if (pic[4].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*68/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[4]));
+    if (pic[6].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*56/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[6]));
+    if (pic[7].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*42/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[7]));
+    if (pic[5].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*30/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[5]));
+    if (pic[3].compare("")!=0)
+    painter.drawPixmap(this->width()*55/192, this->height()*18/108, this->width()*81/192, this->height()*10/108, QPixmap(pic[3]));
 }
 
 void BattleInterface::resizeEvent(QResizeEvent *){
@@ -167,17 +109,6 @@ void BattleInterface::resizeEvent(QResizeEvent *){
 
     for (int i = 0; i < 8; ++i)
         shows[i]->Resize(qsa[i]->width(), qsa[i]->height());
-    /*
-    shows[0]->Resize(m_card->width(), m_card->height());
-    shows[6]->Resize(m_melee->width(), m_melee->height());
-    shows[4]->Resize(m_ranged->width(), m_ranged->height());
-    shows[2]->Resize(m_siege->width(), m_siege->height());
-
-    o_cardshow->Resize(o_card->width(), o_card->height());
-    o_meleeshow->Resize(o_melee->width(), o_melee->height());
-    o_rangedshow->Resize(o_ranged->width(), o_ranged->height());
-    o_siegeshow->Resize(o_siege->width(), o_siege->height());
-    */
 
     turnlabel->setGeometry(this->width()*10/192, this->height()*60/108, this->width()*20/192, this->height()*7/108);
     btnpass->setGeometry(this->width()*12/192, this->height()*43/108, this->width()*16/192, this->height()*6/108);
@@ -360,83 +291,6 @@ void BattleInterface::move(QString info){
     }
 }
 
-/*
-void BattleInterface::move_m(QString info){
-    qDebug() << "move_m";
-    QStringList infolist = info.split(' ');
-    ShowBattleCard *src, *tar;
-    int srcid, tarid;
-    QString str = infolist.at(0);
-    src = convert(str);
-    str = infolist.at(2);
-    tar = convert(str);
-    str = infolist.at(1);
-    srcid = str.toInt();
-    if (infolist.size() == 3){
-        move(src, srcid, tar);
-    } else
-    {
-        str = infolist.at(3);
-        tarid = str.toInt();
-        move(src, srcid, tar, tarid);
-    }
-}
-
-void BattleInterface::move_o(QString info){
-    qDebug() << "move_o";
-    QStringList infolist = info.split(' ');
-    ShowBattleCard *src, *tar;
-    int srcid, tarid;
-    QString str = infolist.at(0);
-    src = convert(str, 1);
-    str = infolist.at(2);
-    tar = convert(str, 1);
-    str = infolist.at(1);
-    srcid = str.toInt();
-    if (infolist.size() == 3){
-        move(src, srcid, tar);
-    } else
-    {
-        str = infolist.at(3);
-        tarid = str.toInt();
-        move(src, srcid, tar, tarid);
-    }
-}
-*/
-
-/*
-void BattleInterface::replace_m(QString info){
-    qDebug() << "replace_m";
-    QStringList infolist = info.split(' ');
-    ShowBattleCard *src, *tar;
-    int srcid;
-    src = m_deckshow;
-    tar = m_cardshow;
-    srcid = QString(infolist.at(1)).toInt();
-    move(src, srcid, tar);
-
-    src = m_cardshow;
-    tar = m_deckshow;
-    srcid = QString(infolist.at(0)).toInt();
-    move(src, srcid, tar);
-}
-
-void BattleInterface::replace_o(QString info){
-    qDebug() << "replace_o";
-    QStringList infolist = info.split(' ');
-    ShowBattleCard *src, *tar;
-    int srcid;
-    src = o_deckshow;
-    tar = o_cardshow;
-    srcid = QString(infolist.at(1)).toInt();
-    move(src, srcid, tar);
-
-    src = o_cardshow;
-    tar = o_deckshow;
-    srcid = QString(infolist.at(0)).toInt();
-    move(src, srcid, tar);
-}
-*/
 void BattleInterface::move(int i1, int j1, int i2, int j2){
     qDebug() << "move";
     QList<Card*> *srctmp = shows[i1]->get_cardlist();
@@ -452,23 +306,6 @@ void BattleInterface::move(int i1, int j1, int i2, int j2){
     this->update();
 }
 
-/*
-void BattleInterface::move(ShowBattleCard *src, int srcid, ShowBattleCard *tar, int tarid){
-    qDebug() << "move";
-    QList<Card*> *srctmp = src->get_cardlist();
-    qDebug() << srctmp->size();
-    Card *srccard = srctmp->at(srcid);
-    if (tarid == -1)
-        tarid = tar->get_cardlist()->size();
-    src->deleteonecard(srcid);
-    tar->addonecard(srccard, tarid);
-
-    src->Resize(src->width(), src->height());
-    tar->Resize(tar->width(), tar->height());
-    updatescore();
-    this->update();
-}
-*/
 void BattleInterface::gameover(int h){
     mw->get_player()->set_battle(nullptr);
     mw->setoverbackground(h);
@@ -506,112 +343,6 @@ void BattleInterface::updatescore(){
     layout_score();
 }
 
-//前方高能
-/*
-void BattleInterface::receive_press_card_m_card(int index){
-    qDebug() << "receive_press_card_m_card " <<  index;
-    mw->mGameClient->Send_Date("click: mcard " + QString::number(index));
-}
-void BattleInterface::receive_press_card_m_melee(int index){
-    qDebug() << "receive_press_card_m_melee " <<  index;
-    mw->mGameClient->Send_Date("click: mmelee " + QString::number(index));
-}
-void BattleInterface::receive_press_card_m_ranged(int index){
-    qDebug() << "receive_press_card_m_ranged " << index;
-    mw->mGameClient->Send_Date("click: mranged " + QString::number(index));
-}
-void BattleInterface::receive_press_card_m_siege(int index){
-    qDebug() << "receive_press_card_m_siege " << index;
-    mw->mGameClient->Send_Date("click: msiege " + QString::number(index));
-}
-void BattleInterface::receive_press_card_o_card(int index){
-    qDebug() << "receive_press_card_o_card " << index;
-    mw->mGameClient->Send_Date("click: ocard " + QString::number(index));
-}
-void BattleInterface::receive_press_card_o_melee(int index){
-    qDebug() << "receive_press_card_o_melee " << index;
-    mw->mGameClient->Send_Date("click: omelee " + QString::number(index));
-}
-void BattleInterface::receive_press_card_o_ranged(int index){
-    qDebug() << "receive_press_card_o_ranged " << index;
-    mw->mGameClient->Send_Date("click: oranged " + QString::number(index));
-}
-void BattleInterface::receive_press_card_o_siege(int index){
-    qDebug() << "receive_press_card_o_siege " << index;
-    mw->mGameClient->Send_Date("click: osiege " + QString::number(index));
-}
-void BattleInterface::receive_hover_card_m_card(int index){
-    qDebug() << "receive_hover_card_m_card " << index;
-    Card *tmp = m_cardshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_m_melee(int index){
-    qDebug() << "receive_hover_card_m_melee " << index;
-    Card *tmp = m_meleeshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_m_ranged(int index){
-    qDebug() << "receive_hover_card_m_ranged " << index;
-    Card *tmp = m_rangedshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_m_siege(int index){
-    qDebug() << "receive_hover_card_m_siege " << index;
-    Card *tmp = m_siegeshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_o_card(int index){
-    qDebug() << "receive_hover_card_o_card " << index;
-}
-void BattleInterface::receive_hover_card_o_melee(int index){
-    qDebug() << "receive_hover_card_o_melee " << index;
-    Card *tmp = o_meleeshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_o_ranged(int index){
-    qDebug() << "receive_hover_card_o_ranged " << index;
-    Card *tmp = o_rangedshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_hover_card_o_siege(int index){
-    qDebug() << "receive_hover_card_o_siege " << index;
-    Card *tmp = m_siegeshow->get_cardlist()->at(index);
-    showcardinfo(tmp);
-}
-void BattleInterface::receive_press_blank_m_card(int index){
-    qDebug() << "receive_press_blank_m_card " << index;
-    mw->mGameClient->Send_Date("click: blank mcard " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_m_melee(int index){
-    qDebug() << "receive_press_blank_m_melee " << index;
-    mw->mGameClient->Send_Date("click: blank mmelee " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_m_ranged(int index){
-    qDebug() << "receive_press_blank_m_ranged " << index;
-    mw->mGameClient->Send_Date("click: blank mranged " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_m_siege(int index){
-    qDebug() << "receive_press_blank_m_siege " << index;
-    mw->mGameClient->Send_Date("click: blank msiege " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_o_card(int index){
-    qDebug() << "receive_press_blank_o_card " << index;
-    mw->mGameClient->Send_Date("click: blank ocard " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_o_melee(int index){
-    qDebug() << "receive_press_blank_o_melee " << index;
-    mw->mGameClient->Send_Date("click: blank omelee " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_o_ranged(int index){
-    qDebug() << "receive_press_blank_o_ranged " << index;
-    mw->mGameClient->Send_Date("click: blank oranged " + QString::number(index));
-}
-void BattleInterface::receive_press_blank_o_siege(int index){
-    qDebug() << "receive_press_blank_o_siege " << index;
-    mw->mGameClient->Send_Date("click: blank osiege " + QString::number(index));
-}
-*/
-
 void BattleInterface::receive_hover_card(int index1, int index2){
     qDebug() << "receive_hover_card" << index1 << index2;
     Card *tmp = shows[index1]->get_cardlist()->at(index2);
@@ -643,12 +374,23 @@ void BattleInterface::bloodchange(QString info){
     int dlt1 = lt.at(2).toInt();
     int dlt2 = lt.at(3).toInt();
     int dlt3 = lt.at(4).toInt();
-    qDebug() << "bloodchange" << dlt1 << dlt2 << dlt3;
+    //qDebug() << "bloodchange" << dlt1 << dlt2 << dlt3;
     shows[x]->get_cardlist()->at(y)->add_armor(dlt3);
-    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    //qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
     shows[x]->get_cardlist()->at(y)->add_boost(dlt2);
-    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    //qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
     shows[x]->get_cardlist()->at(y)->add_base(dlt1);
-    qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    //qDebug() << shows[x]->get_cardlist()->at(y)->get_baseblood();
+    this->update();
+}
+
+void BattleInterface::set_sky(QString info){
+    QStringList lt = info.split(' ');
+    int x = lt.at(0).toInt();
+    int y = lt.at(1).toInt();
+    if (y == 0) sky[x] = clean;
+    if (y == 1) sky[x] = fog;
+    if (y == 2) sky[x] = frost;
+    if (y == 3) sky[x] = rain;
     this->update();
 }

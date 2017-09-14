@@ -48,6 +48,9 @@
         <file alias="drawbackground">images/drawbackground.png</file>
         <file alias="losebackground">images/losebackground.png</file>
         <file alias="winbackground">images/winbackground.png</file>
+        <file alias="fog">images/fog.png</file>
+        <file alias="frost">images/Frost.png</file>
+        <file alias="rain">images/Rain.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="playstyle">style/play.qss</file>

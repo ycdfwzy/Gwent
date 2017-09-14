@@ -46,17 +46,17 @@ void CardLabelinBattle::paintEvent(QPaintEvent *){
         if (armor > 0){
             painter.drawPixmap(5, 5+this->height()*2/5, this->width()/5, this->height()/5, QPixmap(":/images/armor"));
             if (armor < 1000){
-                if (blood < 10){
-                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/5, this->height()/5, QPixmap(digit[blood]));
+                if (armor < 10){
+                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/5, this->height()/5, QPixmap(digit[armor]));
                 } else
-                if (blood < 100){
-                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/15*2, this->height()/5, QPixmap(digit[blood/10]));
-                    painter.drawPixmap(5+this->width()/15, 5+this->height()*2/5, this->width()/15*2, this->height()/5, QPixmap(digit[blood%10]));
+                if (armor < 100){
+                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/15*2, this->height()/5, QPixmap(digit[armor/10]));
+                    painter.drawPixmap(5+this->width()/15, 5+this->height()*2/5, this->width()/15*2, this->height()/5, QPixmap(digit[armor%10]));
                 } else
-                if (blood < 1000){
-                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[blood/100]));
-                    painter.drawPixmap(5+this->width()/20, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[blood%100/10]));
-                    painter.drawPixmap(5+this->width()/10, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[blood%10]));
+                if (armor < 1000){
+                    painter.drawPixmap(5, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[armor/100]));
+                    painter.drawPixmap(5+this->width()/20, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[armor%100/10]));
+                    painter.drawPixmap(5+this->width()/10, 5+this->height()*2/5, this->width()/10, this->height()/5, QPixmap(digit[armor%10]));
                 }
             }
         }

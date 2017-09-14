@@ -142,6 +142,10 @@ void gameClient::dealwithmsg(QString str){
     if (str.startsWith("bloodchange ")){
         QString str0 = str.mid(12);
         mw->get_player()->get_battle()->bloodchange(str0);
+    } else
+    if (str.startsWith("sky ")){
+        QString str0 = str.mid(4);
+        mw->get_player()->get_battle()->set_sky(str0);
     }
     }
 }

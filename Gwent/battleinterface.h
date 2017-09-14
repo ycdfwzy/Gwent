@@ -36,6 +36,7 @@ public:
     void turntip(int);
     void move(QString);
     void bloodchange(QString);
+    void set_sky(QString);
     //void move(ShowBattleCard* src, int srcid, ShowBattleCard* tar, int tarid = -1);
     void move(int, int, int, int j2 = -1);
     void updatescore();
